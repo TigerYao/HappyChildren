@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- text colors -->
+    <!-- 87% of #000000: text -->
+    <color name="text_primary">#333333</color>
+    <!-- 54% of #000000: secondary text / icons -->
+    <color name="text_secondary">#666666</color>
+    <!-- 26% of #000000: hint text -->
+    <color name="text_hint">#999999</color>
+    <!-- 12% of #000000: dividers text -->
+    <color name="divider">#1F000000</color>
+</resources>

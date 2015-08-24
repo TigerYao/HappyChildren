@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--color green-->
+    <color name="green_primary_dark">#388E3C</color>
+    <color name="green_primary">#4CAF50</color>
+    <color name="green_primary_light">#C8E6C9</color>
+    <color name="green_primary_more_light">#E8F5E9</color>
+    <!--color orange-->
+    <color name="orange_primary_dark">#F0730A</color>
+    <color name="orange_primary">#FF9C49</color>
+    <color name="orange_primary_light">#FFC390</color>
+    <!--color white-->
+    <color name="white_primary">#FFF</color>
+    <!--color black-->
+    <!-- 87% of #000000:  -->
+    <color name="black_primary">#333333</color>
+    <!-- 54% of #000000: secondary   -->
+    <color name="black_secondary">#666666</color>
+    <!-- 26% of #000000: hint  -->
+    <color name="black_hint">#999999</color>
+    <!-- 12% of #000000: dividers  -->
+    <color name="black_divider">#1F000000</color>
+</resources>

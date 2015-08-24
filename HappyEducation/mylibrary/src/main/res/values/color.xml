@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Basic Color-->
+    <color name="green">#4CAF50</color>
+    <color name="orange">#EF8A26</color>
+    <color name="gray">#eeeeee</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="red">#FF5722</color>
+    <color name="transparent">#00000000</color>
+
+
+
+    <!--The price color-->
+    <color name="price">#ff9300</color>
+    <!--The bottom of tab text color-->
+    <color name="tabtextdefault">#7d7d7d</color>
+    <!--The bill_years_textview_background color-->
+    <color name="black_alpha16">#4000</color>
+    <!--The card effect background color-->
+    <color name="white_background">#FFEEEEEE</color>
+    <!--The order background color-->
+    <color name="gray_order_bg">#F5F5F5</color>
+    <!--The action sheet view background color-->
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <!--The line color-->
+    <color name="grid_line">#f0f0f0</color>
+</resources>
