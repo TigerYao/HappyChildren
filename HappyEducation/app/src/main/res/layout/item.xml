@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="w"
+        android:layout_width="wrap_content"
         android:gravity="center"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         />
 </FrameLayout>
