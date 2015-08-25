@@ -1,6 +1,7 @@
 package com.dachuwang.software.yaohu.happyeducation.modelview;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,10 @@ import java.util.ArrayList;
  * email yaohu@dachuwang.com
  */
 public class FirstSubAdatepr extends RecyclerViewAdapter<AppInfoEntity>{
-
+    public  ArrayList<AppInfoEntity> data;
     public FirstSubAdatepr(ArrayList<AppInfoEntity> data) {
         super(data);
+        this.data = data;
     }
 
     public FirstSubAdatepr(ArrayList<AppInfoEntity> data, int mode, int toolBarHeight) {
@@ -40,14 +42,20 @@ public class FirstSubAdatepr extends RecyclerViewAdapter<AppInfoEntity>{
 
     @Override
     public void onBindDataViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        AppInfoEntity entity = getData().get(position);
+        final AppInfoEntity entity = getData().get(position);
         AppInfoViewHolder appInfoViewHolder = (AppInfoViewHolder)viewHolder;
 //        appInfoViewHolder.content.setImageURI(Uri.parse(entity.getIcon()));
-//        appInfoViewHolder.title.setText(position+"");
+        appInfoViewHolder.title.setText(entity.getAppname());
+        appInfoViewHolder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("tag",entity.getAppname());
+            }
+        });
 
     }
 
-    public static final class AppInfoViewHolder extends RecyclerView.ViewHolder{
+    public  final class AppInfoViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         ImageView content;
 
@@ -55,6 +63,7 @@ public class FirstSubAdatepr extends RecyclerViewAdapter<AppInfoEntity>{
             super(itemView);
             content = (ImageView) itemView.findViewById(R.id.contentPanel);
             title = (TextView) itemView.findViewById(R.id.title);
+
         }
     }
 }

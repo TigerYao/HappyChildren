@@ -52,7 +52,9 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
 
     public void addItem(int position) {
         final int id = mCurrentItemId++;
-        mItems.add(position, new AppInfoEntity());
+        AppInfoEntity entity = new AppInfoEntity();
+        entity.setAppname("app"+position);
+        mItems.add(position,entity);
         notifyItemInserted(position);
     }
 
@@ -72,12 +74,16 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
         holder.recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager= new LinearLayoutManager(holder.container.getContext(),LinearLayoutManager.HORIZONTAL,false);
         holder.recyclerView.setLayoutManager(layoutManager);
-        int lastPosition= position+COMLUMES;
+        int startPostion = position*COMLUMES;
+        int lastPosition= startPostion+3;
+        if(startPostion>=mItems.size()){
+            startPostion = mItems.size()-1;
+        }
         if(lastPosition>=mItems.size()){
-            lastPosition = mItems.size()-1;
+            lastPosition = mItems.size();
         }
         ArrayList<AppInfoEntity> subList = new ArrayList<>();
-        for(int i=position;i<lastPosition;i++){
+        for(int i=startPostion;i<lastPosition;i++){
             subList.add(mItems.get(i));
         }
         FirstSubAdatepr adatepr = new FirstSubAdatepr(subList);

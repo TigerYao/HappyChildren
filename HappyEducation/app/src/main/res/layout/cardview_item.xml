@@ -30,7 +30,7 @@
         android:text="0"
         android:layout_gravity="center"
         android:textSize="26sp"
-        android:id="@+id/titlegrid"
+        android:id="@+id/title"
         android:gravity="bottom|center_horizontal"
         android:background="@mipmap/catalog_title_bg"
         android:textColor="@color/color_primary_dark"
