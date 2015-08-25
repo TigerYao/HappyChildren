@@ -7,8 +7,10 @@
     <com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewPager
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:layout_gravity="center"
+        android:background="@null"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         app:triggerOffset="0.1" />
@@ -18,11 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_gravity="bottom"
-        android:background="#00f"
         android:gravity="center"
+        android:layout_marginBottom="44dp"
         app:indicator_drawable_normal="@mipmap/circle_indicator_solid"
         app:indicator_drawable_selector="@mipmap/circle_indicator_stroke"
-        app:indicator_spacing="2dp"
+        app:indicator_spacing="5dp"
         app:indicator_type="circle" />
 
     <ImageView
@@ -30,9 +32,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|left"
         android:layout_marginLeft="20dp"
+        android:visibility="gone"
         android:src="@mipmap/ic_launcher" />
 
     <ImageView
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|right"

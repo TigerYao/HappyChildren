@@ -70,7 +70,7 @@ public class HorizontalLayoutFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLongClickable(true);
         updateState(RecyclerView.SCROLL_STATE_IDLE);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
                 updateState(scrollState);

@@ -17,25 +17,28 @@
 package com.dachuwang.software.yaohu.happyeducation.modelview;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleViewHolder> {
-    private static final int COUNT = 3;
+    private static final int COUNT = 13;
+
+    private static final int COMLUMES=3;
 
     private final Context mContext;
     private final RecyclerView mRecyclerView;
-    private final List<Integer> mItems;
+    private final List<AppInfoEntity> mItems;
     private int mCurrentItemId = 0;
 
     public LayoutAdapter(Context context, RecyclerView recyclerView) {
@@ -44,13 +47,12 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
         for (int i = 0; i < COUNT; i++) {
             addItem(i);
         }
-
         mRecyclerView = recyclerView;
     }
 
     public void addItem(int position) {
         final int id = mCurrentItemId++;
-        mItems.add(position, id);
+        mItems.add(position, new AppInfoEntity());
         notifyItemInserted(position);
     }
 
@@ -67,29 +69,33 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
 
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
-        holder.title.setText(mItems.get(position).toString());
-
-        final View itemView = holder.itemView;
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
-            }
-        });
-        final int itemId = mItems.get(position);
+        holder.recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager= new LinearLayoutManager(holder.container.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        holder.recyclerView.setLayoutManager(layoutManager);
+        int lastPosition= position+COMLUMES;
+        if(lastPosition>=mItems.size()){
+            lastPosition = mItems.size()-1;
+        }
+        ArrayList<AppInfoEntity> subList = new ArrayList<>();
+        for(int i=position;i<lastPosition;i++){
+            subList.add(mItems.get(i));
+        }
+        FirstSubAdatepr adatepr = new FirstSubAdatepr(subList);
+        holder.recyclerView.setAdapter(adatepr);
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mItems.size()/COMLUMES+(mItems.size()%3);
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
-        public final TextView title;
-
+        public final LinearLayout container;
+        public final RecyclerView recyclerView;
         public SimpleViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
+            container = (LinearLayout) view.findViewById(R.id.container);
+            recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         }
     }
 }
