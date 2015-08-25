@@ -4,12 +4,19 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginTop="100dp"
     android:background="@mipmap/boolbar_bg"
     android:minHeight="?attr/actionBarSize"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
+    <TabLayout
+        android:id="@+id/titletab"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </TabLayout>
     <RelativeLayout
+        android:id="@+id/desklayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"

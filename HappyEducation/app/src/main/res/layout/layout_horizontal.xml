@@ -11,8 +11,8 @@
         android:clipToPadding="false"
         android:layout_gravity="center"
         android:background="@null"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         app:triggerOffset="0.1" />
 
     <com.dachuwang.software.yaohu.mylibrary.widget.CirclePageIndicator

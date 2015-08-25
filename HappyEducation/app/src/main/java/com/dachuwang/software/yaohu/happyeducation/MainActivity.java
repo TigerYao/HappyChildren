@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView settings;
     @ViewById
     ImageView backup;
-//    @ViewById
-//    TabLayout titletab;
+    @ViewById
+    TabLayout titletab;
 
     public int resIdNormal[]= {R.mipmap.help_normal,R.mipmap.settings_normal,R.mipmap.backup_normal};
     public int resIdSelector[]= {R.mipmap.help_selector,R.mipmap.settings_seleted,R.mipmap.backup_selector};
