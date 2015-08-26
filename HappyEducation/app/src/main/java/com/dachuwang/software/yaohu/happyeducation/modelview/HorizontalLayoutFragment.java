@@ -85,7 +85,6 @@ public class HorizontalLayoutFragment extends Fragment {
                     View v = recyclerView.getChildAt(j);
                     //往左 从 padding 到 -(v.getWidth()-padding) 的过程中，由大到小
                     float rate = 0;
-                    ;
                     if (v.getLeft() <= padding) {
                         if (v.getLeft() >= padding - v.getWidth()) {
                             rate = (padding - v.getLeft()) * 1f / v.getWidth();
@@ -134,6 +133,27 @@ public class HorizontalLayoutFragment extends Fragment {
                         v2.setScaleX(0.9f);
                     }
                 }
+
+            }
+        });
+        mRecyclerView.addOnPageChangedListener(new RecyclerViewPager.OnPageChangedListener() {
+            @Override
+            public void OnPageChanged(int oldPosition, int newPosition) {
+
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });

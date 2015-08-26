@@ -3,6 +3,7 @@ package com.dachuwang.software.yaohu.mylibrary.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcelable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -142,6 +143,12 @@ public class RecyclerViewPager extends RecyclerView {
         }
         mSmoothScrollTargetPosition = position;
         super.smoothScrollToPosition(position);
+        if(mOnPageChangedListeners!=null)
+        for (OnPageChangedListener onPageChangedListener : mOnPageChangedListeners) {
+            if (onPageChangedListener != null) {
+                onPageChangedListener.onPageSelected(position);
+            }
+        }
     }
 
     /**
@@ -253,6 +260,13 @@ public class RecyclerViewPager extends RecyclerView {
     @Override
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
+        if(mOnPageChangedListeners!=null){
+            for (OnPageChangedListener onPageChangedListener : mOnPageChangedListeners) {
+                if (onPageChangedListener != null) {
+                    onPageChangedListener.onPageScrollStateChanged(state);
+                }
+            }
+        }
         if (state == SCROLL_STATE_DRAGGING) {
             mNeedAdjust = true;
             mCurView = getLayoutManager().canScrollHorizontally() ? ViewUtils.getCenterXChild(this) :
@@ -335,7 +349,7 @@ public class RecyclerViewPager extends RecyclerView {
         return position;
     }
 
-    public interface OnPageChangedListener {
+    public interface OnPageChangedListener extends ViewPager.OnPageChangeListener {
         void OnPageChanged(int oldPosition, int newPosition);
     }
 

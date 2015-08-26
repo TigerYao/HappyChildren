@@ -1,5 +1,6 @@
 package com.dachuwang.software.yaohu.happyeducation.modelview;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.happyeducation.activity.CartongBooksActivity;
+import com.dachuwang.software.yaohu.happyeducation.activity.CartongBooksActivity_;
 import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewAdapter;
 import java.util.ArrayList;
@@ -49,7 +52,7 @@ public class FirstSubAdatepr extends RecyclerViewAdapter<AppInfoEntity>{
         appInfoViewHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("tag",entity.getAppname());
+                view.getContext().startActivity(new Intent(view.getContext(), CartongBooksActivity_.class));
             }
         });
 

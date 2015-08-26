@@ -2,6 +2,7 @@ package com.dachuwang.software.yaohu.mylibrary.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -31,17 +32,12 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
 
     private RecyclerViewPager.OnPageChangedListener mUserDefinedPageChangeListener;
     private int size = 0;
-    private int strokenDrawableId, solidDrawableId;
+    private Drawable normalImg, selectedimg;
 
     public CirclePageIndicator(Context context) {
         this(context, null);
     }
 
-//    public CirclePageIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
-//        super(context, attrs, defStyleAttr);
-//
-//
-//    }
 
     public CirclePageIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,8 +50,8 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
             mIndicatorType = a.getInt(
                     R.styleable.CirclePageIndicator_indicator_type,
                     DEFAULT_INDICATOR_TYPE);
-            strokenDrawableId = a.getResourceId(R.styleable.CirclePageIndicator_indicator_drawable_normal, R.drawable.circle_indicator_stroke);
-            solidDrawableId = a.getResourceId(R.styleable.CirclePageIndicator_indicator_drawable_selector, R.drawable.circle_indicator_solid);
+            normalImg = a.getDrawable(R.styleable.CirclePageIndicator_indicator_drawable_normal);
+            selectedimg = a.getDrawable(R.styleable.CirclePageIndicator_indicator_drawable_selector);
         } finally {
             a.recycle();
         }
@@ -98,10 +94,10 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
                         LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 params.leftMargin = mIndicatorSpacing;
                 params.rightMargin = mIndicatorSpacing;
-                img.setImageResource(strokenDrawableId);
+                img.setImageDrawable(normalImg);
                 addView(img, params);
             }
-            ((ImageView) getChildAt(mActivePosition)).setImageResource(solidDrawableId);
+            ((ImageView) getChildAt(mActivePosition)).setImageDrawable(selectedimg);
         } else if (mIndicatorType == INDICATOR_TYPE_FRACTION) {
             TextView textView = new TextView(getContext());
             textView.setTag(count);
@@ -112,6 +108,11 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
         }
     }
 
+    public void updateDrawable(Drawable normal,Drawable seleted){
+        this.normalImg = normal;
+        this.selectedimg = seleted;
+    }
+
     private int getPosition(int position) {
         return false ? position % size : position;
     }
@@ -120,8 +121,8 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
         position = getPosition(position);
         if (mActivePosition != position) {
             if (mIndicatorType == INDICATOR_TYPE_CIRCLE) {
-                ((ImageView) getChildAt(mActivePosition)).setImageResource(strokenDrawableId);
-                ((ImageView) getChildAt(position)).setImageResource(solidDrawableId);
+                ((ImageView) getChildAt(mActivePosition)).setImageDrawable(normalImg);
+                ((ImageView) getChildAt(position)).setImageDrawable(selectedimg);
             } else if (mIndicatorType == INDICATOR_TYPE_FRACTION) {
                 TextView textView = (TextView) getChildAt(0);
                 //noinspection RedundantCast
@@ -171,6 +172,25 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
         updateIndicator(newPosition);
         if (mUserDefinedPageChangeListener != null)
             mUserDefinedPageChangeListener.OnPageChanged(oldPosition, newPosition);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        if (mUserDefinedPageChangeListener != null)
+            mUserDefinedPageChangeListener.onPageScrolled(position,positionOffset,positionOffsetPixels);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        updateIndicator(position);
+        if (mUserDefinedPageChangeListener != null)
+            mUserDefinedPageChangeListener.onPageSelected(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        if (mUserDefinedPageChangeListener != null)
+            mUserDefinedPageChangeListener.onPageScrollStateChanged(state);
     }
 }
 

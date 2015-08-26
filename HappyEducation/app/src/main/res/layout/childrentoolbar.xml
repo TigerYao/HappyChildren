@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:minHeight="?attr/actionBarSize"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
+    </android.support.v7.widget.Toolbar>
+
+   <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:background="@mipmap/boolbar_bg"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/up"
+            android:src="@mipmap/forward_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/titletab"
+            android:layout_weight="1.0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.design.widget.TabLayout>
+        <ImageView
+            android:id="@+id/next"
+            android:src="@mipmap/backup_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    </LinearLayout>
