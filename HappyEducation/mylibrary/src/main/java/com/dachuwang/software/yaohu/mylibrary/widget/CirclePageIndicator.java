@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.dachuwang.software.yaohu.mylibrary.R;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * Created by liangfei on 3/26/15.
@@ -70,7 +71,7 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
     }
 
     public void setRecyclerViewPager(RecyclerViewPager pager) {
-        mUserDefinedPageChangeListener = getOnPageChangeListener(pager);
+        mUserDefinedPageChangeListener = getOnPageChangeListener(pager).get(0);
         mActivePosition = pager.getCurrentPosition();
         pager.addOnPageChangedListener(this);
         addIndicator(pager.getAdapter().getItemCount());
@@ -132,11 +133,11 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
         }
     }
 
-    private RecyclerViewPager.OnPageChangedListener getOnPageChangeListener(RecyclerViewPager pager) {
+    private List<RecyclerViewPager.OnPageChangedListener> getOnPageChangeListener(RecyclerViewPager pager) {
         try {
-            Field f = pager.getClass().getDeclaredField("mOnPageChangeListener");
+            Field f = pager.getClass().getDeclaredField("mOnPageChangedListeners");
             f.setAccessible(true);
-            return (RecyclerViewPager.OnPageChangedListener) f.get(pager);
+            return  (List<RecyclerViewPager.OnPageChangedListener>)f.get(pager);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
