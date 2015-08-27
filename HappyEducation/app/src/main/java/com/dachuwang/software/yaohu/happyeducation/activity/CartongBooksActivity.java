@@ -2,10 +2,10 @@ package com.dachuwang.software.yaohu.happyeducation.activity;
 
 import android.app.Fragment;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
@@ -62,7 +62,12 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem search=menu.findItem(R.id.ab_search);
+        search.collapseActionView();
+        SearchView searchview=(SearchView) search.getActionView();
+        searchview.setIconifiedByDefault(false);
+        searchview.setBackgroundResource(R.mipmap.search_box_back);
         return super.onCreateOptionsMenu(menu);
     }
 }

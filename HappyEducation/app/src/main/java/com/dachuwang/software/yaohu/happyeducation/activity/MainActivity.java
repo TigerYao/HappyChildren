@@ -1,6 +1,8 @@
 package com.dachuwang.software.yaohu.happyeducation.activity;
 
 import android.app.Fragment;
+import android.app.WallpaperManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.happyeducation.service.WallpaperSettingsService;
+import com.dachuwang.software.yaohu.happyeducation.service.WallpaperSettingsService_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -21,10 +25,10 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.api.BackgroundExecutor;
 
 import java.io.File;
+import java.io.IOException;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public int index = 0;
     @ViewById
     Toolbar toolbar;
     @ViewById
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        index = savedInstanceState.getInt("index");
 
     }
 
@@ -58,26 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         backup.setOnClickListener(this);
         imageViews=new ImageView[]{help,settings,backup};
         setSupportActionBar(toolbar);
+        WallpaperSettingsService_.intent(this).start();
     }
 
-    @Background(delay = 2000, id = "updatewallpaper")
-    public void caculaterWallPaperChage() {
-        index++;
-        updageWallpaper();
-        Log.i("vv", index + "");
-
-    }
-
-    @UiThread
-    public void updageWallpaper() {
-        caculaterWallPaperChage();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putInt("index", index);
-    }
 
 
     @Override
@@ -89,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        updageWallpaper();
     }
 
     @Override
@@ -116,7 +101,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             imageViews[i].setImageResource(resIdNormal[i]);
         }
     }
-
-
 
 }
