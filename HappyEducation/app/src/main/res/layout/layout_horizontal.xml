@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/up"
+        android:visibility="invisible"
+        android:layout_width="100dp"
+        android:scaleType="center"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentLeft="true"
+        android:src="@mipmap/check_flipthearrowleft" />
 
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginRight="20dp"
+        android:scaleType="center"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/check_flipthearrowright" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@id/next"
+        android:layout_toRightOf="@id/up"
+        android:layout_height="match_parent">
     <com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewPager
         android:id="@+id/list"
         android:layout_width="match_parent"
@@ -11,8 +36,6 @@
         android:clipToPadding="false"
         android:layout_gravity="center"
         android:background="@null"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         app:triggerOffset="0.1" />
 
     <com.dachuwang.software.yaohu.mylibrary.widget.CirclePageIndicator
@@ -26,22 +49,7 @@
         app:indicator_drawable_selector="@mipmap/circle_indicator_stroke"
         app:indicator_spacing="5dp"
         app:indicator_type="circle" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
-        android:layout_marginLeft="20dp"
-        android:visibility="gone"
-        android:src="@mipmap/ic_launcher" />
-
-    <ImageView
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right"
-        android:layout_marginRight="20dp"
-        android:src="@mipmap/ic_launcher" />
+    </FrameLayout>
 
 
-</FrameLayout>
+</RelativeLayout>

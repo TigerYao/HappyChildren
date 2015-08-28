@@ -13,8 +13,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.happyeducation.modelview.HorizontalLayoutFragment;
+import com.dachuwang.software.yaohu.happyeducation.modelview.LayoutAdapter;
 import com.dachuwang.software.yaohu.happyeducation.service.WallpaperSettingsService;
 import com.dachuwang.software.yaohu.happyeducation.service.WallpaperSettingsService_;
+import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewInterface;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -56,12 +59,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @AfterViews
     public void viewEvent() {
+        LayoutAdapter.COMLUMES=3;
         help.setOnClickListener(this);
         settings.setOnClickListener(this);
         backup.setOnClickListener(this);
         imageViews=new ImageView[]{help,settings,backup};
         setSupportActionBar(toolbar);
         WallpaperSettingsService_.intent(this).start();
+        ((HorizontalLayoutFragment)fragment).mAdapter.setOnItemClickListener(new RecyclerViewInterface.OnItemClickListener() {
+            @Override
+            public void onItemClick(View var1, Object var2) {
+                CartongBooksActivity_.intent(MainActivity.this).start();
+            }
+        });
     }
 
 
@@ -81,13 +91,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.help:
-                changeBg(0);
+//                changeBg(0);
                 break;
             case R.id.settings:
-                changeBg(1);
+//                changeBg(1);
                 break;
             case R.id.backup:
-                changeBg(2);
+//                changeBg(2);
                 break;
         }
     }

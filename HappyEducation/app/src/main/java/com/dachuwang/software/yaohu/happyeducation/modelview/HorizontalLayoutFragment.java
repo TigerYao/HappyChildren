@@ -18,6 +18,7 @@ package com.dachuwang.software.yaohu.happyeducation.modelview;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,9 +26,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.happyeducation.base.AppInfo;
 import com.dachuwang.software.yaohu.mylibrary.widget.CirclePageIndicator;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewPager;
 
@@ -36,6 +39,8 @@ public class HorizontalLayoutFragment extends Fragment {
     private RecyclerViewPager mRecyclerView;
     private Toast mToast;
     private CirclePageIndicator indicator;
+    public LayoutAdapter mAdapter;
+    private ImageView  up,next;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public class HorizontalLayoutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         if (mViewRoot == null) {
             mViewRoot = inflater.inflate(R.layout.layout_horizontal, container, false);
         } else if (mViewRoot.getParent() != null) {
@@ -58,53 +64,52 @@ public class HorizontalLayoutFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final Activity activity = getActivity();
-
         mToast = Toast.makeText(activity, "", Toast.LENGTH_SHORT);
         mToast.setGravity(Gravity.CENTER, 0, 0);
-
         mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.list);
         indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layout);
-        mRecyclerView.setAdapter(new LayoutAdapter(activity, mRecyclerView));
+       mAdapter = new LayoutAdapter(activity, mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLongClickable(true);
         updateState(RecyclerView.SCROLL_STATE_IDLE);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
-                updateState(scrollState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int i, int i2) {
-                int childCount = mRecyclerView.getChildCount();
-                int width = mRecyclerView.getChildAt(0).getWidth();
-                int padding = (mRecyclerView.getWidth() - width) / 2;
-                for (int j = 0; j < childCount; j++) {
-                    View v = recyclerView.getChildAt(j);
-                    //往左 从 padding 到 -(v.getWidth()-padding) 的过程中，由大到小
-                    float rate = 0;
-                    if (v.getLeft() <= padding) {
-                        if (v.getLeft() >= padding - v.getWidth()) {
-                            rate = (padding - v.getLeft()) * 1f / v.getWidth();
-                        } else {
-                            rate = 1;
-                        }
-                        v.setScaleY(1 - rate * 0.1f);
-                        v.setScaleX(1 - rate * 0.1f);
-
-                    } else {
-                        //往右 从 padding 到 recyclerView.getWidth()-padding 的过程中，由大到小
-                        if (v.getLeft() <= recyclerView.getWidth() - padding) {
-                            rate = (recyclerView.getWidth() - padding - v.getLeft()) * 1f / v.getWidth();
-                        }
-                        v.setScaleY(0.9f + rate * 0.1f);
-                        v.setScaleX(0.9f + rate * 0.1f);
-                    }
-                }
-            }
-        });
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
+//                updateState(scrollState);
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int i, int i2) {
+//                int childCount = mRecyclerView.getChildCount();
+//                int width = mRecyclerView.getChildAt(0).getWidth();
+//                int padding = (mRecyclerView.getWidth() - width) / 2;
+//                for (int j = 0; j < childCount; j++) {
+//                    View v = recyclerView.getChildAt(j);
+//                    //往左 从 padding 到 -(v.getWidth()-padding) 的过程中，由大到小
+//                    float rate = 0;
+//                    if (v.getLeft() <= padding) {
+//                        if (v.getLeft() >= padding - v.getWidth()) {
+//                            rate = (padding - v.getLeft()) * 1f / v.getWidth();
+//                        } else {
+//                            rate = 1;
+//                        }
+//                        v.setScaleY(1 - rate * 0.1f);
+//                        v.setScaleX(1 - rate * 0.1f);
+//
+//                    } else {
+//                        //往右 从 padding 到 recyclerView.getWidth()-padding 的过程中，由大到小
+//                        if (v.getLeft() <= recyclerView.getWidth() - padding) {
+//                            rate = (recyclerView.getWidth() - padding - v.getLeft()) * 1f / v.getWidth();
+//                        }
+//                        v.setScaleY(0.9f + rate * 0.1f);
+//                        v.setScaleX(0.9f + rate * 0.1f);
+//                    }
+//                }
+//            }
+//        });
 
         mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -149,7 +154,16 @@ public class HorizontalLayoutFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-
+                if (position == mAdapter.getItemCount() - 1) {
+                    next.setVisibility(View.INVISIBLE);
+                } else if (position == 0) {
+                    up.setVisibility(View.INVISIBLE);
+                } else if (position > 0 && position < mAdapter.getItemCount()) {
+                    if (next.getVisibility() == View.INVISIBLE)
+                        next.setVisibility(View.VISIBLE);
+                    if (up.getVisibility() == View.INVISIBLE)
+                        up.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -158,6 +172,26 @@ public class HorizontalLayoutFragment extends Fragment {
             }
         });
         indicator.setRecyclerViewPager(mRecyclerView);
+        up = (ImageView) mViewRoot.findViewById(R.id.up);
+        next = (ImageView) mViewRoot.findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mRecyclerView.smoothScrollToPosition(mRecyclerView.getCurrentPosition()+1);
+            }
+        });
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mRecyclerView.smoothScrollToPosition(mRecyclerView.getCurrentPosition()-1);
+            }
+        });
+
+        if(mAdapter.getItemCount()==1){
+            next.setVisibility(View.INVISIBLE);
+        }
+        Drawable upDrawalbe= AppInfo.createStateDrawable(getResources().getDrawable(R.mipmap.check_flipthearrowleft),getResources().getDrawable(R.mipmap.check_flipthearrowleft_select));
+        up.setImageDrawable(upDrawalbe);
     }
 
 
