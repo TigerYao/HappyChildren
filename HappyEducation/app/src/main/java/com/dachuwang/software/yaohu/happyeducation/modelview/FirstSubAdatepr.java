@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.dachuwang.software.yaohu.happyeducation.R;
 import com.dachuwang.software.yaohu.happyeducation.activity.CartongBooksActivity;
 import com.dachuwang.software.yaohu.happyeducation.activity.CartongBooksActivity_;
+import com.dachuwang.software.yaohu.happyeducation.base.AppInfo;
 import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewAdapter;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewInterface;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class FirstSubAdatepr extends RecyclerViewAdapter<AppInfoEntity>{
     public  ArrayList<AppInfoEntity> data;
     private int childrenWith = 0;
+    public static int height =0;
     public FirstSubAdatepr(ArrayList<AppInfoEntity> data,int childrenWith) {
         super(data);
         this.data = data;
@@ -62,9 +64,12 @@ public class FirstSubAdatepr extends RecyclerViewAdapter<AppInfoEntity>{
                 }
             }
         });
-        childrenWith = childrenWith-appInfoViewHolder.itemView.getPaddingLeft()-appInfoViewHolder.itemView.getPaddingRight();
+//        childrenWith = childrenWith-appInfoViewHolder.itemView.getPaddingLeft()-appInfoViewHolder.itemView.getPaddingRight();
         if(childrenWith>0){
             appInfoViewHolder.itemView.getLayoutParams().width = childrenWith;
+        }
+        if(height>0){
+            appInfoViewHolder.itemView.getLayoutParams().height = height;
         }
     }
 

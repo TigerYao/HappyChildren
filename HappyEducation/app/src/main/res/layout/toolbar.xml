@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/boolbar_h"
     android:layout_marginTop="100dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -16,29 +16,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:padding="10dp">
+        android:layout_marginLeft="@dimen/mainactivity_cardmargin_x"
+        android:layout_marginRight="@dimen/mainactivity_cardmargin_x"
+        >
         <ImageView
             android:id="@+id/help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/boolbar_h"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
+            android:scaleType="fitEnd"
             android:src="@drawable/helpbg" />
 
         <ImageView
             android:id="@+id/settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/boolbar_h"
+            android:layout_height="@dimen/boolbar_h"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
+            android:scaleType="fitEnd"
             android:src="@drawable/settings" />
 
-        <ImageView
-            android:id="@+id/backup"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@id/settings"
-            android:src="@drawable/forwardbg" />
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

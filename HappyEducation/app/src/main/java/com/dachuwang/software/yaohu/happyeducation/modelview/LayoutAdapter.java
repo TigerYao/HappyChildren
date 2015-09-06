@@ -35,7 +35,7 @@ import java.util.List;
 
 
 public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleViewHolder> {
-    private static final int COUNT = 13;
+    private static final int COUNT = 12;
 
     public static  int COMLUMES=3;
 

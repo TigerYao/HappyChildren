@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
 import com.dachuwang.software.yaohu.happyeducation.base.BaseActivity;
+import com.dachuwang.software.yaohu.happyeducation.modelview.FirstSubAdatepr;
 import com.dachuwang.software.yaohu.happyeducation.modelview.LayoutAdapter;
 
 import org.androidannotations.annotations.AfterViews;
@@ -35,10 +36,12 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
     @AfterViews
     public void viewEvent(){
         LayoutAdapter.COMLUMES = 4;
+        FirstSubAdatepr.height = (int)getResources().getDimension(R.dimen.cartong_cardbg_height);
         titletab.setTabMode(TabLayout.MODE_SCROLLABLE);
         bindTitleData();
         titletab.setOnTabSelectedListener(this);
         setSupportActionBar(toolbar);
+
     }
 
     @Override
