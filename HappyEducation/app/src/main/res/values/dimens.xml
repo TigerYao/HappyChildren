@@ -1,5 +1,16 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="mainactivity_cardbg_with">510dp</dimen>
+    <dimen name="mainactivity_cardbg_height">534dp</dimen>
+    <dimen name="mainactivity_cardimg_with">490dp</dimen>
+    <dimen name="mainactivity_cardimg_height">446dp</dimen>
+    <dimen name="mainactivity_cardtitle_w">490dp</dimen>
+    <dimen name="mainactivity_cardtitle_h">68dp</dimen>
+    <dimen name="mainactivity_cardmargin_x">155dp</dimen>
+    <dimen name="boolbar_h">100dp</dimen>
+    <dimen name="padding5">5dp</dimen>
+    <dimen name="cartong_cardbg_with">420dp</dimen>
+    <dimen name="cartong_cardbg_height">446dp</dimen>
+    <dimen name="helpe_pading">144dp</dimen>
+    <dimen name="dot_h">40dp</dimen>
 </resources>

@@ -363,4 +363,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter {
 
     }
 
+    public OnItemClickListener getmOnItemClickListener() {
+        return mOnItemClickListener;
+    }
 }

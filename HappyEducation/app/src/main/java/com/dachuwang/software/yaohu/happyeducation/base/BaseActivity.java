@@ -351,21 +351,5 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
-     * drawable.addState(new int[]{android.R.attr.state_pressed}, this.getResources().getDrawable(R.drawable.botton_add_down));
-     drawable.addState(new int[]{android.R.attr.state_selected}, this.getResources().getDrawable(R.drawable.botton_add));
-     drawable.addState(new int[]{}, this.getResources().getDrawable(R.drawable.botton_add));//默认
-     * @param normal
-     * @param seleted
-     */
-    public Drawable createStateDrawable(Drawable normal,Drawable seleted){
-        StateListDrawable drawable = new StateListDrawable();
-        int state[][]={{android.R.attr.state_focused},{android.R.attr.state_selected},{android.R.attr.state_checked},{}};
-        drawable.addState(state[0],seleted);
-        drawable.addState(state[1],seleted);
-        drawable.addState(state[2],seleted);
-        drawable.addState(state[3],normal);
-        return drawable;
-    }
 
 }

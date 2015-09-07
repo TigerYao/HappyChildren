@@ -25,8 +25,7 @@ public abstract class DbUtilsHelper {
 
         //初始化File  
         String path = Environment.getExternalStorageDirectory().toString()
-                + File.separator
-                + "happyChildren" + File.separator + "db";
+                + "\\HappyChildren\\db";
         File file = new File(path);
         if (!file.exists()) {
             Toast.makeText(ctx, "文件不存在！", Toast.LENGTH_LONG).show();
@@ -38,7 +37,6 @@ public abstract class DbUtilsHelper {
         daoConfig.setDbName("book.db");
         Log.i("tag", daoConfig.getDbDir());
         dbUtils = DbUtils.create(daoConfig);
-
     }
 
     public static DbUtils getDbUtils() {

@@ -17,8 +17,10 @@
 package com.dachuwang.software.yaohu.happyeducation.modelview;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,21 +28,23 @@ import android.widget.LinearLayout;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
 import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
+import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleViewHolder> {
-    private static final int COUNT = 13;
+    private static final int COUNT = 12;
 
-    private static final int COMLUMES=3;
+    public static  int COMLUMES=3;
 
     private final Context mContext;
     private final RecyclerView mRecyclerView;
     private final List<AppInfoEntity> mItems;
     private int mCurrentItemId = 0;
-
+    int width = 0;
+    private RecyclerViewInterface.OnItemClickListener onItemClickListener;
     public LayoutAdapter(Context context, RecyclerView recyclerView) {
         mContext = context;
         mItems = new ArrayList<>(COUNT);
@@ -48,6 +52,7 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
             addItem(i);
         }
         mRecyclerView = recyclerView;
+
     }
 
     public void addItem(int position) {
@@ -70,24 +75,45 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
     }
 
     @Override
-    public void onBindViewHolder(SimpleViewHolder holder, int position) {
+    public void onBindViewHolder(final SimpleViewHolder holder, int position) {
         holder.recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager= new LinearLayoutManager(holder.container.getContext(),LinearLayoutManager.HORIZONTAL,false);
         holder.recyclerView.setLayoutManager(layoutManager);
         int startPostion = position*COMLUMES;
-        int lastPosition= startPostion+3;
+        int lastPosition= startPostion+COMLUMES;
         if(startPostion>=mItems.size()){
             startPostion = mItems.size()-1;
         }
         if(lastPosition>=mItems.size()){
             lastPosition = mItems.size();
         }
-        ArrayList<AppInfoEntity> subList = new ArrayList<>();
+        final ArrayList<AppInfoEntity> subList = new ArrayList<>();
         for(int i=startPostion;i<lastPosition;i++){
             subList.add(mItems.get(i));
         }
-        FirstSubAdatepr adatepr = new FirstSubAdatepr(subList);
+        if(width==0) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                     width = (holder.container.getWidth()-holder.container.getPaddingRight()*2)/ COMLUMES;
+                     onBindList(holder, subList);
+                }
+            }, 500);
+        }else {
+            onBindList(holder, subList);
+        }
+    }
+
+    private void onBindList(SimpleViewHolder holder, ArrayList<AppInfoEntity> subList) {
+        FirstSubAdatepr adatepr = new FirstSubAdatepr(subList, width);
         holder.recyclerView.setAdapter(adatepr);
+        adatepr.setOnItemClickListener(new RecyclerViewInterface.OnItemClickListener() {
+            @Override
+            public void onItemClick(View var1, Object var2) {
+                if (onItemClickListener != null)
+                    onItemClickListener.onItemClick(var1, var2);
+            }
+        });
     }
 
     @Override
@@ -103,5 +129,9 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
             container = (LinearLayout) view.findViewById(R.id.container);
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         }
+    }
+
+    public void setOnItemClickListener(RecyclerViewInterface.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
