@@ -7,7 +7,7 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
     <fragment
-        android:layout_below="@id/toolbars"
+        android:layout_below="@id/toolbar"
         android:id="@+id/fragment"
         android:name="com.dachuwang.software.yaohu.happyeducation.modelview.HorizontalLayoutFragment"
         android:layout_width="match_parent"

@@ -30,7 +30,7 @@
     <com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewPager
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mainactivity_cardbg_height"
+        android:layout_height="@dimen/mainactivity_cardbg_height_534"
         android:clipToPadding="false"
         android:layout_gravity="center"
         android:background="@null"
