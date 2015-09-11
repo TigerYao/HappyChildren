@@ -31,8 +31,6 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
     ImageView next;
     @ViewById
     Toolbar toolbar;
-    String title[]={"最近阅读","全部绘本","绘本教学","最近阅读","全部绘本","绘本教学","最近阅读","全部绘本","绘本教学"};
-    int resId[]={R.mipmap.recentlyread_back,R.mipmap.all_picture_back,R.mipmap.search_back,R.mipmap.recentlyread_back,R.mipmap.all_picture_back,R.mipmap.search_back,R.mipmap.recentlyread_back,R.mipmap.all_picture_back,R.mipmap.search_back};
     @AfterViews
     public void viewEvent(){
         LayoutAdapter.COMLUMES = 4;
@@ -60,9 +58,9 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
     }
 
     public void bindTitleData(){
-        for(int i=0;i<title.length;i++){
-            titletab.addTab(titletab.newTab().setText(title[i]).setIcon(resId[i]));
-        }
+//        for(int i=0;i<title.length;i++){
+//            titletab.addTab(titletab.newTab().setText(title[i]).setIcon(resId[i]));
+//        }
     }
 
     @Override
