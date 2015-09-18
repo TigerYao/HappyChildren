@@ -6,10 +6,24 @@
     <dimen name="mainactivity_cardimg_height_446">446px</dimen>
     <dimen name="mainactivity_cardtitle_h">68px</dimen>
     <dimen name="mainactivity_cardmargin_5">5px</dimen>
-    <dimen name="boolbar_h">100px</dimen>
+    <dimen name="toolbar_h">100px</dimen>
     <dimen name="padding5">5px</dimen>
     <dimen name="cartong_cardbg_with">420px</dimen>
     <dimen name="cartong_cardbg_height">446px</dimen>
     <dimen name="helpe_pading">144px</dimen>
     <dimen name="dot_h">40px</dimen>
+    <dimen name="second_width_430">430px</dimen>
+    <dimen name="second_heigh_524">524px</dimen>
+    <dimen name="second_pic_heigh_446">446px</dimen>
+    <dimen name="second_pic_width_420">420px</dimen>
+    <dimen name="second_title_heigh_68">68px</dimen>
+    <dimen name="text_size_36">36sp</dimen>
+    <dimen name="menu_icon_size_85">85px</dimen>
+    <dimen name="search_input_width_720">720px</dimen>
+    <dimen name="search_input_height_90">90px</dimen>
+    <dimen name="camera_width">124px</dimen>
+    <dimen name="camera_height">92px</dimen>
+    <dimen name="navgation_bar_height_90">90px</dimen>
+    <dimen name="navgation_bar_width_45">45px</dimen>
 </resources>
+

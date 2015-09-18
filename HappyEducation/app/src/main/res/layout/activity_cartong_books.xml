@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.dachuwang.software.yaohu.happyeducation.activity.CartongBooksActivity">
     <include
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbars"
         layout="@layout/childrentoolbar" />
     <fragment
         android:id="@+id/fragment"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/toolbars"
         android:name="com.dachuwang.software.yaohu.happyeducation.modelview.HorizontalLayoutFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

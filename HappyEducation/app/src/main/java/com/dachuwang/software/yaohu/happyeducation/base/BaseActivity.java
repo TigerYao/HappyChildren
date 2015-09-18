@@ -352,4 +352,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
+    public void setBackground(View view ,String path){
+        Drawable drawable = Drawable.createFromPath(path);
+        view.setBackground(drawable);
+    }
 }
