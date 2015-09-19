@@ -35,6 +35,7 @@
         android:textSize="26sp"
         android:id="@+id/title"
         android:gravity="bottom|center_horizontal"
+        android:background="@mipmap/maintitle"
         android:textColor="@color/color_primary_dark"
         android:layout_width="match_parent"
         android:layout_height="68px" />

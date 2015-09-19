@@ -22,11 +22,11 @@
         android:layout_width="match_parent"
         android:padding="20dp"
         android:background="@mipmap/boolbar_bg"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/toolbar_h">
         <ImageView
             android:id="@+id/up"
             android:src="@mipmap/forward_normal"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/"
             android:layout_height="match_parent" />
         <android.support.design.widget.TabLayout
             android:id="@+id/titletab"

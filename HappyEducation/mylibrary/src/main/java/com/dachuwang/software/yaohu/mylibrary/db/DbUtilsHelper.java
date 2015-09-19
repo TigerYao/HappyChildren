@@ -13,7 +13,7 @@ import java.io.File;
  * Created by yaohu on 15/8/21.
  * email yaohu@dachuwang.com
  */
-public abstract class DbUtilsHelper {
+public  class DbUtilsHelper {
     private static DbUtils dbUtils;
 
     public DbUtilsHelper(Context ctx) {
@@ -24,19 +24,23 @@ public abstract class DbUtilsHelper {
         }
 
         //初始化File  
-        String path = Environment.getExternalStorageDirectory().toString()
+        String path = Environment.getRootDirectory().toString()
                 + "\\HappyChildren\\db";
         File file = new File(path);
         if (!file.exists()) {
             Toast.makeText(ctx, "文件不存在！", Toast.LENGTH_LONG).show();
             file.mkdirs();
         }
-        DbUtils.DaoConfig daoConfig = new DbUtils.DaoConfig(ctx);
-        daoConfig.setDbUpgradeListener(new MyDbUpdateListener());
-        daoConfig.setDbDir(path);
-        daoConfig.setDbName("book.db");
-        Log.i("tag", daoConfig.getDbDir());
-        dbUtils = DbUtils.create(daoConfig);
+//        DbUtils.DaoConfig daoConfig = new DbUtils.DaoConfig(ctx);
+//        daoConfig.setDbUpgradeListener(new MyDbUpdateListener());
+//        daoConfig.setDbDir(path);
+//        daoConfig.setDbName("book.db");
+//        Log.i("tag", daoConfig.getDbDir());
+//        dbUtils = DbUtils.create(daoConfig);
+        if(file.exists()) {
+            dbUtils = DbUtils.create(ctx, path, "book.db");
+        }else
+            Toast.makeText(ctx, "文件不存在！", Toast.LENGTH_LONG).show();
     }
 
     public static DbUtils getDbUtils() {

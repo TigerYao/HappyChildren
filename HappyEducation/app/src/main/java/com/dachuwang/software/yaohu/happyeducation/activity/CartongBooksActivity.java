@@ -35,6 +35,7 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
     public void viewEvent(){
         LayoutAdapter.COMLUMES = 4;
         FirstSubAdatepr.height = (int)getResources().getDimension(R.dimen.cartong_cardbg_height);
+        FirstSubAdatepr.childrenWith = (int)getResources().getDimension(R.dimen.cartong_cardbg_with);
         titletab.setTabMode(TabLayout.MODE_SCROLLABLE);
         bindTitleData();
         titletab.setOnTabSelectedListener(this);

@@ -12,12 +12,17 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.happyeducation.base.BaseActivity;
+import com.dachuwang.software.yaohu.happyeducation.modelview.FirstSubAdatepr;
 import com.dachuwang.software.yaohu.happyeducation.modelview.HorizontalLayoutFragment;
 import com.dachuwang.software.yaohu.happyeducation.modelview.LayoutAdapter;
 import com.dachuwang.software.yaohu.happyeducation.service.WallpaperSettingsService_;
+import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.BookEntity;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewInterface;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FragmentById;
 import org.androidannotations.annotations.ViewById;
@@ -25,7 +30,7 @@ import org.androidannotations.api.BackgroundExecutor;
 
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     @ViewById
     Toolbar toolbar;
     @FragmentById
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TabLayout titletab;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
@@ -47,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @AfterViews
     public void viewEvent() {
         LayoutAdapter.COMLUMES=3;
+        FirstSubAdatepr.height = (int) getResources().getDimension(R.dimen.mainactivity_cardbg_height_534);
+        FirstSubAdatepr.childrenWith = (int)getResources().getDimension(R.dimen.mainactivity_cardbg_with_510);
         help.setOnClickListener(this);
         settings.setOnClickListener(this);
         setSupportActionBar(toolbar);
@@ -83,4 +91,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Background
+    public void onLoardData(){
+
+    }
 }

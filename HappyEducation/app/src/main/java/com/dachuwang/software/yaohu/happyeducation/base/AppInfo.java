@@ -5,6 +5,15 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.DisplayMetrics;
 
+import com.dachuwang.software.yaohu.mylibrary.db.DbUtilsHelper;
+import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.BookEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.CatalogEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.RecentReadEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.SettingEntity;
+
+import java.util.ArrayList;
+
 
 /**
  * Created by yee on 11/18/13.
@@ -16,6 +25,12 @@ public class AppInfo {
     public static int height;
     public static float density;
     public static int densityDpi;
+    public static ArrayList<AppInfoEntity> appInfoEntity;
+    public static ArrayList<BookEntity> bookEntity;
+    public static CatalogEntity catalogEntity;
+    public static RecentReadEntity recentReadEntity;
+    public static SettingEntity settingEntity;
+    public static DbUtilsHelper dbUtilsHelper;
     public AppInfo() {
         super();
     }
@@ -42,6 +57,10 @@ public class AppInfo {
         drawable.addState(state[2],seleted);
         drawable.addState(state[3],normal);
         return drawable;
+    }
+
+    public static  void getDataFromDb(){
+//        dbUtilsHelper.getDbUtils().findAll()
     }
 
 }

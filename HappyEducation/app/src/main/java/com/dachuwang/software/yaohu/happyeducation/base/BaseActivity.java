@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -356,4 +357,9 @@ public class BaseActivity extends AppCompatActivity {
         Drawable drawable = Drawable.createFromPath(path);
         view.setBackground(drawable);
     }
+    public void setImageViewDrawalbe(ImageView view ,String path){
+        Drawable drawable = Drawable.createFromPath(path);
+        view.setImageDrawable(drawable);
+    }
+
 }

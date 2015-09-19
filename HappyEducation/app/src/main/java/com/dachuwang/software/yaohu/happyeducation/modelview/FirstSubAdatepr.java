@@ -26,7 +26,7 @@ import java.util.ArrayList;
  */
 public class FirstSubAdatepr extends RecyclerViewAdapter<AppInfoEntity>{
     public  ArrayList<AppInfoEntity> data;
-    private int childrenWith = 0;
+    public static int childrenWith = 0;
     public static int height =0;
     public FirstSubAdatepr(ArrayList<AppInfoEntity> data,int childrenWith) {
         super(data);
