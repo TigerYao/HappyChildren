@@ -8,6 +8,7 @@
     <dimen name="mainactivity_cardmargin_5">5px</dimen>
     <dimen name="toolbar_h">100px</dimen>
     <dimen name="padding5">5px</dimen>
+    <dimen name="padding8">8px</dimen>
     <dimen name="cartong_cardbg_with">420px</dimen>
     <dimen name="cartong_cardbg_height">446px</dimen>
     <dimen name="helpe_pading">144px</dimen>

@@ -27,6 +27,6 @@ public class RecyclerViewInterface {
     }
 
     public interface OnItemClickListener<T> {
-        void onItemClick(View var1, T var2);
+        void onItemClick(View var1,T var2);
     }
 }

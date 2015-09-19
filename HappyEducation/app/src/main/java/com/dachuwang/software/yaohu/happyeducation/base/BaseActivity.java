@@ -362,4 +362,9 @@ public class BaseActivity extends AppCompatActivity {
         view.setImageDrawable(drawable);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 }

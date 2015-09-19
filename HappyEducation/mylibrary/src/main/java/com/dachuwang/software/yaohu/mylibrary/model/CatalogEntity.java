@@ -1,5 +1,6 @@
 package com.dachuwang.software.yaohu.mylibrary.model;
 
+import android.os.Environment;
 import android.os.Parcel;
 
 import com.lidroid.xutils.db.annotation.Column;
@@ -39,7 +40,7 @@ public class CatalogEntity extends BaseEntity {
     }
 
     public String getIcon() {
-        return icon;
+        return Environment.getExternalStorageDirectory()+icon.replace("\\","/");
     }
 
     public void setIcon(String icon) {

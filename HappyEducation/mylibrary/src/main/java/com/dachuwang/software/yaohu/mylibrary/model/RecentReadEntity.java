@@ -10,7 +10,7 @@ import com.lidroid.xutils.db.annotation.Table;
  * email yaohu@dachuwang.com
  */
 @Table(name = "recent_table")
-public class RecentReadEntity extends BaseEntity {
+public class RecentReadEntity extends AppInfoEntity {
     public static final Creator<RecentReadEntity> CREATOR = new Creator<RecentReadEntity>() {
         public RecentReadEntity createFromParcel(Parcel source) {
             return new RecentReadEntity(source);
@@ -22,6 +22,8 @@ public class RecentReadEntity extends BaseEntity {
     };
     @Column(column = "bookiid")
     private int bookid;
+    @Column(column = "parentid")
+    private int parentid;
 
     public RecentReadEntity() {
     }
@@ -29,6 +31,7 @@ public class RecentReadEntity extends BaseEntity {
     protected RecentReadEntity(Parcel in) {
         super(in);
         this.bookid = in.readInt();
+        this.parentid = in.readInt();
     }
 
     @Override
@@ -40,5 +43,7 @@ public class RecentReadEntity extends BaseEntity {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.bookid);
+        dest.writeInt(this.parentid);
     }
+
 }

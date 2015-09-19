@@ -2,23 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/up"
         android:visibility="invisible"
-        android:layout_width="50dp"
+        android:layout_width="@dimen/navgation_bar_width_45"
         android:scaleType="center"
-        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_height="@dimen/navgation_bar_height_90"
         android:layout_gravity="center_vertical|left"
         android:layout_alignParentLeft="true"
         android:src="@mipmap/check_flipthearrowleft" />
 
     <ImageView
         android:id="@+id/next"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/navgation_bar_width_45"
+        android:layout_height="@dimen/navgation_bar_height_90"
         android:layout_gravity="center_vertical|right"
         android:scaleType="center"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:src="@mipmap/check_flipthearrowright" />
 
@@ -29,10 +32,10 @@
         android:layout_height="match_parent">
     <com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewPager
         android:id="@+id/list"
+        android:layout_marginTop="@dimen/menu_icon_size_85"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mainactivity_cardbg_height_534"
         android:clipToPadding="false"
-        android:layout_gravity="center"
         android:background="@null"
         app:triggerOffset="0.1" />
 
@@ -42,12 +45,18 @@
         android:layout_height="40dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         app:indicator_drawable_normal="@mipmap/maincurrent_yellowpagebreak"
         app:indicator_drawable_selector="@mipmap/maincurrent_yellowpagebreak_select"
         app:indicator_spacing="5dp"
         app:indicator_type="circle" />
     </FrameLayout>
-
+<FrameLayout
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
+    android:background="#000"
+    android:layout_margin="40dp"
+    android:layout_width="@dimen/camera_width"
+    android:layout_height="@dimen/camera_height"></FrameLayout>
 
 </RelativeLayout>

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dachuwang.software.yaohu.happyeducation" >
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application
@@ -21,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:name=".activity.CartongBooksActivity_"
             android:launchMode="singleTop"
             android:label="@string/title_activity_cartong_books" >

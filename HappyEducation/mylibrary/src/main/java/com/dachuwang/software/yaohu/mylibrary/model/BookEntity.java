@@ -1,5 +1,6 @@
 package com.dachuwang.software.yaohu.mylibrary.model;
 
+import android.os.Environment;
 import android.os.Parcel;
 
 import com.lidroid.xutils.db.annotation.Column;
@@ -38,6 +39,9 @@ public class BookEntity extends BaseEntity {
     @Column(column = "readcount")
     private int readcount;
 
+    @Column(column = "parentid")
+    private int parentid;
+
     public BookEntity() {
     }
 
@@ -51,6 +55,7 @@ public class BookEntity extends BaseEntity {
         this.index = in.readInt();
         this.pos = in.readInt();
         this.readcount = in.readInt();
+        this.parentid = in.readInt();
     }
 
     public int getCatalogid() {
@@ -62,7 +67,7 @@ public class BookEntity extends BaseEntity {
     }
 
     public String getIcon() {
-        return icon;
+        return Environment.getExternalStorageDirectory()+icon;
     }
 
     public void setIcon(String icon) {
@@ -117,6 +122,14 @@ public class BookEntity extends BaseEntity {
         this.url = url;
     }
 
+    public int getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(int parentid) {
+        this.parentid = parentid;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -133,5 +146,6 @@ public class BookEntity extends BaseEntity {
         dest.writeInt(this.index);
         dest.writeInt(this.pos);
         dest.writeInt(this.readcount);
+        dest.writeInt(this.parentid);
     }
 }

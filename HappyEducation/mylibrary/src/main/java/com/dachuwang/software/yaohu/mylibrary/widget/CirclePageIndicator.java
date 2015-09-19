@@ -120,7 +120,7 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
 
     private void updateIndicator(int position) {
         position = getPosition(position);
-        if (mActivePosition != position) {
+        if (mActivePosition != position&&mActivePosition<getChildCount()) {
             if (mIndicatorType == INDICATOR_TYPE_CIRCLE) {
                 ((ImageView) getChildAt(mActivePosition)).setImageDrawable(normalImg);
                 ((ImageView) getChildAt(position)).setImageDrawable(selectedimg);

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.happyeducation.base.AppInfo;
 import com.dachuwang.software.yaohu.happyeducation.base.BaseActivity;
 import com.dachuwang.software.yaohu.happyeducation.modelview.FirstSubAdatepr;
 import com.dachuwang.software.yaohu.happyeducation.modelview.HorizontalLayoutFragment;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @AfterViews
     public void viewEvent() {
+        onLoardData();
         LayoutAdapter.COMLUMES=3;
         FirstSubAdatepr.height = (int) getResources().getDimension(R.dimen.mainactivity_cardbg_height_534);
         FirstSubAdatepr.childrenWith = (int)getResources().getDimension(R.dimen.mainactivity_cardbg_with_510);
@@ -62,7 +64,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ((HorizontalLayoutFragment)fragment).mAdapter.setOnItemClickListener(new RecyclerViewInterface.OnItemClickListener() {
             @Override
             public void onItemClick(View var1, Object var2) {
-                CartongBooksActivity_.intent(MainActivity.this).start();
+
+                    AppInfoEntity entity = (AppInfoEntity) var2;
+                    int type = entity.getType();
+                    CartongBooksActivity_.intent(MainActivity.this).type(type).parentid(entity.get_id()).start();
             }
         });
     }
@@ -89,10 +94,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
-
-
     @Background
     public void onLoardData(){
-
+        AppInfo.getDataFromDb();
+        ((HorizontalLayoutFragment)fragment).updateAdapter(AppInfo.appInfoEntityList,3);
     }
 }

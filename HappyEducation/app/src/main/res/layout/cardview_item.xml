@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="20dp"
-    android:paddingRight="60dp"
+    android:paddingLeft="20px"
+    android:paddingRight="60px"
     android:gravity="center"
     >
 <android.support.v7.widget.CardView
     android:id="@+id/cardview"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="2dp"
     android:layout_gravity="center"
-    android:padding="@dimen/padding5"
     android:layout_height="match_parent"
     app:cardBackgroundColor="@color/cardview_light_background"
     android:layout_width="match_parent">
 <LinearLayout
-    android:layout_width="@dimen/mainactivity_cardimg_with_490"
+    android:layout_width="match_parent"
     android:gravity="center"
+    android:padding="@dimen/padding5"
     android:layout_gravity="center"
     android:orientation="vertical"
     android:layout_height="match_parent">
@@ -25,6 +25,7 @@
         android:layout_gravity="center"
         android:textSize="26sp"
         android:id="@+id/contentPanel"
+        android:scaleType="fitXY"
         android:gravity="center"
         android:layout_weight="1.0"
         android:layout_width="match_parent"
@@ -36,7 +37,7 @@
         android:id="@+id/title"
         android:gravity="bottom|center_horizontal"
         android:background="@mipmap/maintitle"
-        android:textColor="@color/color_primary_dark"
+        android:textColor="@color/white_primary"
         android:layout_width="match_parent"
         android:layout_height="68px" />
     </LinearLayout>

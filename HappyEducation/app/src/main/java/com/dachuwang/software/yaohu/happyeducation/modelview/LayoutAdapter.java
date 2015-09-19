@@ -27,41 +27,37 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
-import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.BaseEntity;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleViewHolder> {
-    private static final int COUNT = 12;
-
+public class LayoutAdapter<T> extends RecyclerView.Adapter<LayoutAdapter.SimpleViewHolder> {
     public static  int COMLUMES=3;
-
     private final Context mContext;
     private final RecyclerView mRecyclerView;
-    private final List<AppInfoEntity> mItems;
+    private  ArrayList<?extends BaseEntity> mItems;
     private int mCurrentItemId = 0;
     int width = 0;
     private RecyclerViewInterface.OnItemClickListener onItemClickListener;
-    public LayoutAdapter(Context context, RecyclerView recyclerView) {
+    public LayoutAdapter(Context context, RecyclerView recyclerView,ArrayList<? extends BaseEntity> items) {
         mContext = context;
-        mItems = new ArrayList<>(COUNT);
-        for (int i = 0; i < COUNT; i++) {
-            addItem(i);
-        }
         mRecyclerView = recyclerView;
+        if(items==null)
+            items = new ArrayList<>();
+        this.mItems = items;
+    }
+
+    public void updateDatas(ArrayList<BaseEntity> items,int comlumes){
+        mItems = items;
+        COMLUMES = comlumes;
+        notifyDataSetChanged();
 
     }
 
-    public void addItem(int position) {
-        final int id = mCurrentItemId++;
-        AppInfoEntity entity = new AppInfoEntity();
-        entity.setAppname("app"+position);
-        mItems.add(position,entity);
-        notifyItemInserted(position);
-    }
+
 
     public void removeItem(int position) {
         mItems.remove(position);
@@ -87,7 +83,7 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
         if(lastPosition>=mItems.size()){
             lastPosition = mItems.size();
         }
-        final ArrayList<AppInfoEntity> subList = new ArrayList<>();
+        final ArrayList<BaseEntity> subList = new ArrayList<>();
         for(int i=startPostion;i<lastPosition;i++){
             subList.add(mItems.get(i));
         }
@@ -104,21 +100,21 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
         }
     }
 
-    private void onBindList(SimpleViewHolder holder, ArrayList<AppInfoEntity> subList) {
+    private void onBindList(SimpleViewHolder holder, ArrayList<BaseEntity> subList) {
         FirstSubAdatepr adatepr = new FirstSubAdatepr(subList, width);
         holder.recyclerView.setAdapter(adatepr);
-        adatepr.setOnItemClickListener(new RecyclerViewInterface.OnItemClickListener() {
-            @Override
-            public void onItemClick(View var1, Object var2) {
-                if (onItemClickListener != null)
-                    onItemClickListener.onItemClick(var1, var2);
-            }
-        });
+        adatepr.setOnItemClickListener(onItemClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size()/COMLUMES+(mItems.size()%3);
+        if(mItems==null||mItems.size()<=0){
+            return 0;
+        }
+        if(mItems.size()<=COMLUMES){
+            return 1;
+        }
+        return mItems.size()/COMLUMES+(mItems.size()%COMLUMES);
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {

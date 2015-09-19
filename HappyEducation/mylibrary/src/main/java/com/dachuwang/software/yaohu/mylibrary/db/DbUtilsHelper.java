@@ -5,9 +5,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
 import com.lidroid.xutils.DbUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by yaohu on 15/8/21.
@@ -22,21 +24,13 @@ public  class DbUtilsHelper {
             Toast.makeText(ctx, "读取失败，SD存储卡不存在！", Toast.LENGTH_LONG).show();
             return;
         }
-
         //初始化File  
-        String path = Environment.getRootDirectory().toString()
-                + "\\HappyChildren\\db";
+        String path =Environment.getExternalStorageDirectory()+"/happychildren/db";
         File file = new File(path);
         if (!file.exists()) {
-            Toast.makeText(ctx, "文件不存在！", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, "文件不存在！"+path, Toast.LENGTH_LONG).show();
             file.mkdirs();
         }
-//        DbUtils.DaoConfig daoConfig = new DbUtils.DaoConfig(ctx);
-//        daoConfig.setDbUpgradeListener(new MyDbUpdateListener());
-//        daoConfig.setDbDir(path);
-//        daoConfig.setDbName("book.db");
-//        Log.i("tag", daoConfig.getDbDir());
-//        dbUtils = DbUtils.create(daoConfig);
         if(file.exists()) {
             dbUtils = DbUtils.create(ctx, path, "book.db");
         }else
@@ -46,6 +40,11 @@ public  class DbUtilsHelper {
     public static DbUtils getDbUtils() {
         return dbUtils;
     }
+
+//    public ArrayList<AppInfoEntity> getAppInfoListByType(){
+//
+//    }
+
 
     class MyDbUpdateListener implements DbUtils.DbUpgradeListener {
         @Override

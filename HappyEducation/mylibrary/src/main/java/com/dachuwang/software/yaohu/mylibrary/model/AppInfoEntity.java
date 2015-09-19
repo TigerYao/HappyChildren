@@ -1,5 +1,6 @@
 package com.dachuwang.software.yaohu.mylibrary.model;
 
+import android.os.Environment;
 import android.os.Parcel;
 
 import com.dachuwang.software.yaohu.mylibrary.db.DbUtilsHelper;
@@ -61,7 +62,7 @@ public class AppInfoEntity extends BaseEntity {
     }
 
     public String getIcon() {
-        return icon;
+        return Environment.getExternalStorageDirectory()+icon;
     }
 
     public void setIcon(String icon) {

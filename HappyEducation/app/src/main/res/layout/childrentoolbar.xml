@@ -15,21 +15,49 @@
     android:minHeight="?attr/actionBarSize"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="right|center_vertical"
+        android:layout_height="match_parent">
+        <EditText
+            android:padding="@dimen/padding5"
+            android:id="@+id/search_input"
+            android:layout_width="wrap_content"
+            android:background="@mipmap/search_box_back"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/search_bar"
+            android:layout_margin="@dimen/padding5"
+            android:layout_width="wrap_content"
+            android:src="@mipmap/search_back"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/return_back"
+            android:layout_margin="@dimen/padding5"
+            android:layout_width="wrap_content"
+            android:src="@drawable/returnback"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
    <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:padding="20dp"
+        android:paddingLeft="20dp"
+       android:paddingRight="20dp"
+       android:gravity="center"
         android:background="@mipmap/boolbar_bg"
         android:layout_height="@dimen/toolbar_h">
         <ImageView
             android:id="@+id/up"
             android:src="@mipmap/forward_normal"
-            android:layout_width="@dimen/"
-            android:layout_height="match_parent" />
+            android:layout_width="@dimen/search_input_height_90"
+            android:layout_height="@dimen/search_input_height_90" />
         <android.support.design.widget.TabLayout
             android:id="@+id/titletab"
+            app:tabIndicatorColor="@color/transparent"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/white_primary"
             android:layout_weight="1.0"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -37,7 +65,7 @@
         <ImageView
             android:id="@+id/next"
             android:src="@mipmap/backup_normal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_width="@dimen/search_input_height_90"
+            android:layout_height="@dimen/search_input_height_90" />
     </LinearLayout>
     </LinearLayout>

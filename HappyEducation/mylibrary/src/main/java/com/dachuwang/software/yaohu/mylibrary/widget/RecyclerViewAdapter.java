@@ -18,7 +18,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter {
     public ArrayList<Object> mFooters;
     public int mMode;
     protected int mToolBarHeight;
-    private OnItemClickListener mOnItemClickListener;
+    protected OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
     private OnEmptyViewClickListener mOnEmptyViewClickListener;
     private OnErrorViewClickListener mOnErrorViewClickListener;
@@ -154,18 +154,18 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter {
 //            return dataViewHolder;
 //        } else {
             dataViewHolder = this.onCreateDataViewHolder(parent);
-            dataViewHolder.itemView.setOnClickListener(new OnClickListener() {
-                public void onClick(final View v) {
-                    if(null != RecyclerViewAdapter.this.mOnItemClickListener) {
-                        (new Handler()).postDelayed(new Runnable() {
-                            public void run() {
-                                RecyclerViewAdapter.this.mOnItemClickListener.onItemClick(v, v.getTag());
-                            }
-                        }, 200L);
-                    }
-
-                }
-            });
+//            dataViewHolder.itemView.setOnClickListener(new OnClickListener() {
+//                public void onClick(final View v) {
+//                    if(null != RecyclerViewAdapter.this.mOnItemClickListener) {
+//                        (new Handler()).postDelayed(new Runnable() {
+//                            public void run() {
+//                                RecyclerViewAdapter.this.mOnItemClickListener.onItemClick(v, v.getTag());
+//                            }
+//                        }, 200L);
+//                    }
+//
+//                }
+//            });
             dataViewHolder.itemView.setOnLongClickListener(new OnLongClickListener() {
                 public boolean onLongClick(final View v) {
                     if(null != RecyclerViewAdapter.this.mOnItemLongClickListener) {
