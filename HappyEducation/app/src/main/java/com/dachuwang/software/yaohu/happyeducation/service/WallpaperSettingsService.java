@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.mylibrary.file.FileUtils;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EService;
@@ -39,10 +41,11 @@ public class WallpaperSettingsService extends Service{
     @Override
     public void onCreate() {
         super.onCreate();
+        wallpaperDir = FileUtils.findFileByNameContain(Environment.getExternalStorageDirectory()+"/happychildren/background","style");
 
     }
 
-    @Background(delay = 2000, id = "updatewallpaper")
+    @Background(delay = 10000, id = "updatewallpaper")
     public void caculaterWallPaperChage() {
         if(wallpaperDir!=null) {
             if (index >= wallpaperDir.length) {
@@ -60,12 +63,15 @@ public class WallpaperSettingsService extends Service{
     public int onStartCommand(Intent intent, int flags, int startId) {
         wallpaperManager = WallpaperManager.getInstance(this);
         try {
-            wallpaperManager.setResource(R.raw.bg);
-            Log.i("ddd","jjj");
+            // wallpaperManager.setResource(R.raw.bg);
+            String path=Environment.getExternalStorageDirectory() + "/happychildren/background/style000.png";
+            Bitmap bitmap= BitmapFactory.decodeFile(path);
+            if(bitmap!=null)
+           wallpaperManager.setBitmap(bitmap);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        caculaterWallPaperChage();
+        //  caculaterWallPaperChage();
         return super.onStartCommand(intent, flags, startId);
     }
 

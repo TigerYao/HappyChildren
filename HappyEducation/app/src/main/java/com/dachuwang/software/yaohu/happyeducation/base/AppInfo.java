@@ -13,6 +13,7 @@ import com.dachuwang.software.yaohu.mylibrary.model.CatalogEntity;
 import com.dachuwang.software.yaohu.mylibrary.model.RecentReadEntity;
 import com.dachuwang.software.yaohu.mylibrary.model.SettingEntity;
 import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 
 import java.io.File;
@@ -63,16 +64,20 @@ public class AppInfo {
         return drawable;
     }
 
-    public static StateListDrawable createStateDrawable(String normal){
+    public static Drawable createStateDrawable(String normal){
        Drawable normalDrawable= Drawable.createFromPath(normal);
         String seleted = normal.replace(".png","_select.png");
+        if(!new File(seleted).exists()){
+            return normalDrawable;
+        }
         Drawable selectedDrawable =Drawable.createFromPath(seleted);
         return createStateDrawable(normalDrawable,selectedDrawable);
     }
     public static  void getDataFromDb() {
         try {
             appInfoEntityList = new ArrayList<>(dbUtilsHelper.getDbUtils().findAll(AppInfoEntity.class));
-        } catch (DbException e) {
+//            catalogEntityList = new ArrayList<>(dbUtilsHelper.getDbUtils().findAll(CatalogEntity.class));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -104,19 +109,38 @@ public class AppInfo {
         }
         return bookEntityList;
     }
-    public static ArrayList<RecentReadEntity> getRecentRead(boolean isall,int parentid,int bookid) {
+    public static ArrayList<BookEntity> getRecentRead(int parentid) {
         ArrayList<RecentReadEntity> recentReadEntities=new ArrayList<>();
+        ArrayList<BookEntity> bookEntityList = new ArrayList<>();
         try {
             Selector selector = Selector.from(RecentReadEntity.class);
-            if(isall){
-                selector.where("parentid","=",parentid);
-            }else
-                selector.where("bookid","=",bookid);
+                selector.where("parentid"," = ",parentid).orderBy("reverse2", true);
             List<RecentReadEntity> list= dbUtilsHelper.getDbUtils().findAll(selector);
+            Log.i("tag",list.toString()+"??????");
             recentReadEntities = new ArrayList<>(list);
+            for(int i=0;i<recentReadEntities.size();i++){
+                RecentReadEntity recentReadEntity = recentReadEntities.get(i);
+                Selector selector1 = Selector.from(BookEntity.class);
+                selector1.where("_id", " = ", recentReadEntity.getBookid());
+                BookEntity bookEntity = dbUtilsHelper.getDbUtils().findFirst(selector1);
+                bookEntityList.add(bookEntity);
+                Log.i("tagd", recentReadEntity.getBookid() + "???"+recentReadEntity.get_id());
+
+            }
         } catch (DbException e) {
             e.printStackTrace();
         }
-        return recentReadEntities;
+        return bookEntityList;
+    }
+
+    public static void saveREcentRead(RecentReadEntity entity){
+        try {
+            dbUtilsHelper.getDbUtils().delete(RecentReadEntity.class, WhereBuilder.b("bookid", " = ", entity.getBookid()).and("parentid", " = ", entity.getParentid()));
+            Log.i("tag", entity.getBookid() + "???");
+            entity.setReverse2(System.currentTimeMillis()+"");
+            dbUtilsHelper.getDbUtils().saveBindingId(entity);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 }

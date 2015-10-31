@@ -1,16 +1,18 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="mainactivity_cardbg_with_510">510px</dimen>
-    <dimen name="mainactivity_cardbg_height_534">534px</dimen>
-    <dimen name="mainactivity_cardimg_with_490">490px</dimen>
-    <dimen name="mainactivity_cardimg_height_446">446px</dimen>
+    <dimen name="mainactivity_cardbg_with_543">543px</dimen>
+    <dimen name="mainactivity_cardbg_height_532">532px</dimen>
+    <dimen name="mainactivity_cardimg_with_490">485px</dimen>
+    <dimen name="mainactivity_cardimg_height_446">374px</dimen>
     <dimen name="mainactivity_cardtitle_h">68px</dimen>
     <dimen name="mainactivity_cardmargin_5">5px</dimen>
     <dimen name="toolbar_h">100px</dimen>
     <dimen name="padding5">5px</dimen>
     <dimen name="padding8">8px</dimen>
-    <dimen name="cartong_cardbg_with">420px</dimen>
-    <dimen name="cartong_cardbg_height">446px</dimen>
+    <dimen name="cartong_cardbg_with">424px</dimen>
+    <dimen name="cartong_cardbg_height">404px</dimen>
+    <dimen name="cartong_cardimg_with">372px</dimen>
+    <dimen name="cartong_cardbgimg_height">285px</dimen>
     <dimen name="helpe_pading">144px</dimen>
     <dimen name="dot_h">40px</dimen>
     <dimen name="second_width_430">430px</dimen>

@@ -13,15 +13,7 @@ import com.lidroid.xutils.db.annotation.Table;
 @Table(name = "catalog_table")
 public class CatalogEntity extends BaseEntity {
 
-    public static final Creator<CatalogEntity> CREATOR = new Creator<CatalogEntity>() {
-        public CatalogEntity createFromParcel(Parcel source) {
-            return new CatalogEntity(source);
-        }
 
-        public CatalogEntity[] newArray(int size) {
-            return new CatalogEntity[size];
-        }
-    };
     @Column(column = "name")
     private String name;
     @Column(column = "icon")
@@ -32,12 +24,7 @@ public class CatalogEntity extends BaseEntity {
     public CatalogEntity() {
     }
 
-    protected CatalogEntity(Parcel in) {
-        super(in);
-        this.name = in.readString();
-        this.icon = in.readString();
-        this.index = in.readInt();
-    }
+
 
     public String getIcon() {
         return Environment.getExternalStorageDirectory()+icon.replace("\\","/");
@@ -63,16 +50,5 @@ public class CatalogEntity extends BaseEntity {
         this.name = name;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeString(this.name);
-        dest.writeString(this.icon);
-        dest.writeInt(this.index);
-    }
 }

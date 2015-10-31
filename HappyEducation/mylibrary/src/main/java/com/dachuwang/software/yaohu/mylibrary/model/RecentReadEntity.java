@@ -10,40 +10,86 @@ import com.lidroid.xutils.db.annotation.Table;
  * email yaohu@dachuwang.com
  */
 @Table(name = "recent_table")
-public class RecentReadEntity extends AppInfoEntity {
-    public static final Creator<RecentReadEntity> CREATOR = new Creator<RecentReadEntity>() {
-        public RecentReadEntity createFromParcel(Parcel source) {
-            return new RecentReadEntity(source);
-        }
-
-        public RecentReadEntity[] newArray(int size) {
-            return new RecentReadEntity[size];
-        }
-    };
-    @Column(column = "bookiid")
+public class RecentReadEntity  {
+    @Column(column = "bookid")
     private int bookid;
     @Column(column = "parentid")
     private int parentid;
 
+    @Column(column = "_id")
+    private int _id;
+
+    @Column(column = "reverse1")
+    private int reverse1 = 0;
+
+    @Column(column = "reverse2")
+    private String reverse2;
+
+    @Column(column = "type")
+    private int type;
+
+
+
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
+
+    public int getReverse1() {
+        return reverse1;
+    }
+
+    public void setReverse1(int reverse1) {
+        this.reverse1 = reverse1;
+    }
+
+    public String getReverse2() {
+        return reverse2;
+    }
+
+    public void setReverse2(String reverse2) {
+        this.reverse2 = reverse2;
+    }
+
+
+
     public RecentReadEntity() {
     }
 
-    protected RecentReadEntity(Parcel in) {
-        super(in);
-        this.bookid = in.readInt();
-        this.parentid = in.readInt();
+
+    public int getBookid() {
+        return bookid;
+    }
+
+    public void setBookid(int bookid) {
+        this.bookid = bookid;
+    }
+
+    public int getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(int parentid) {
+        this.parentid = parentid;
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        return "RecentReadEntity{" +
+                "bookid=" + bookid +
+                ", parentid=" + parentid +
+                '}';
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeInt(this.bookid);
-        dest.writeInt(this.parentid);
-    }
-
 }

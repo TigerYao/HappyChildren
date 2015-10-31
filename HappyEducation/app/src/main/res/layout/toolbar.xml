@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/toolbar_h"
-    android:layout_marginTop="100dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:background="@mipmap/boolbar_bg"
     android:minHeight="?attr/actionBarSize"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
@@ -21,20 +21,21 @@
         >
         <ImageView
             android:id="@+id/help"
-            android:layout_width="@dimen/toolbar_h"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:layout_alignParentLeft="true"
-            android:scaleType="fitEnd"
-            android:src="@drawable/helpbg" />
+            android:scaleType="fitCenter"
+            />
 
         <ImageView
             android:id="@+id/settings"
-            android:layout_width="@dimen/toolbar_h"
-            android:layout_height="@dimen/toolbar_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="20dp"
-            android:scaleType="fitEnd"
-            android:src="@drawable/settings" />
+            android:layout_marginRight= "50dp"
+            android:scaleType="fitCenter"
+            />
 
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

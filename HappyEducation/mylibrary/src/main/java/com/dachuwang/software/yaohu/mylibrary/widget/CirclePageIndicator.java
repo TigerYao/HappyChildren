@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dachuwang.software.yaohu.mylibrary.R;
+import com.dachuwang.software.yaohu.mylibrary.file.FilePathConstant;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -51,14 +52,25 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
             mIndicatorType = a.getInt(
                     R.styleable.CirclePageIndicator_indicator_type,
                     DEFAULT_INDICATOR_TYPE);
-            normalImg = a.getDrawable(R.styleable.CirclePageIndicator_indicator_drawable_normal);
-            selectedimg = a.getDrawable(R.styleable.CirclePageIndicator_indicator_drawable_selector);
+//            normalImg = a.getDrawable(R.styleable.CirclePageIndicator_indicator_drawable_normal);
+//            selectedimg = a.getDrawable(R.styleable.CirclePageIndicator_indicator_drawable_selector);
         } finally {
             a.recycle();
         }
-
+        setNormalImg(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR + "maincurrent.png"), Drawable.createFromPath(FilePathConstant.APK_ICON_DIR + "maincurrent_select.png"));
         init();
     }
+
+    public void setNormalImg(Drawable normalImg,Drawable selectedimg) {
+        this.normalImg = normalImg;
+        this.selectedimg = selectedimg;
+        invalidate();
+    }
+
+//    public void setSelectedimg(Drawable selectedimg) {
+//        this.selectedimg = selectedimg;
+//
+//    }
 
     private void init() {
         setOrientation(HORIZONTAL);
@@ -72,7 +84,7 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
 
     public void setRecyclerViewPager(RecyclerViewPager pager) {
         mUserDefinedPageChangeListener = getOnPageChangeListener(pager).get(0);
-        mActivePosition = pager.getCurrentPosition();
+        mActivePosition = 0;
         pager.addOnPageChangedListener(this);
         addIndicator(pager.getAdapter().getItemCount());
     }
@@ -86,9 +98,9 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
     }
 
     private void addIndicator(int count) {
+        removeAllViews();
         if (count <= 1) return;
         if (mIndicatorType == INDICATOR_TYPE_CIRCLE) {
-            removeAllViews();
             for (int i = 0; i < count; i++) {
                 ImageView img = new ImageView(getContext());
                 LayoutParams params = new LayoutParams(
@@ -98,6 +110,7 @@ public class CirclePageIndicator extends LinearLayout implements RecyclerViewPag
                 img.setImageDrawable(normalImg);
                 addView(img, params);
             }
+            if(mActivePosition>=0&&mActivePosition<count)
             ((ImageView) getChildAt(mActivePosition)).setImageDrawable(selectedimg);
         } else if (mIndicatorType == INDICATOR_TYPE_FRACTION) {
             TextView textView = new TextView(getContext());

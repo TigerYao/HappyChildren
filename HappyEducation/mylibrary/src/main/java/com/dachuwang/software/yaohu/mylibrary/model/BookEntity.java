@@ -13,15 +13,6 @@ import com.lidroid.xutils.db.annotation.Table;
 @Table(name = "book_table")
 public class BookEntity extends BaseEntity {
 
-    public static final Creator<BookEntity> CREATOR = new Creator<BookEntity>() {
-        public BookEntity createFromParcel(Parcel source) {
-            return new BookEntity(source);
-        }
-
-        public BookEntity[] newArray(int size) {
-            return new BookEntity[size];
-        }
-    };
     @Column(column = "catalogid")
     private int catalogid;
     @Column(column = "name")
@@ -45,18 +36,6 @@ public class BookEntity extends BaseEntity {
     public BookEntity() {
     }
 
-    protected BookEntity(Parcel in) {
-        super(in);
-        this.catalogid = in.readInt();
-        this.name = in.readString();
-        this.icon = in.readString();
-        this.url = in.readString();
-        this.readtime = in.readString();
-        this.index = in.readInt();
-        this.pos = in.readInt();
-        this.readcount = in.readInt();
-        this.parentid = in.readInt();
-    }
 
     public int getCatalogid() {
         return catalogid;
@@ -115,7 +94,7 @@ public class BookEntity extends BaseEntity {
     }
 
     public String getUrl() {
-        return url;
+        return Environment.getExternalStorageDirectory()+url;
     }
 
     public void setUrl(String url) {
@@ -130,22 +109,19 @@ public class BookEntity extends BaseEntity {
         this.parentid = parentid;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeInt(this.catalogid);
-        dest.writeString(this.name);
-        dest.writeString(this.icon);
-        dest.writeString(this.url);
-        dest.writeString(this.readtime);
-        dest.writeInt(this.index);
-        dest.writeInt(this.pos);
-        dest.writeInt(this.readcount);
-        dest.writeInt(this.parentid);
+    public String toString() {
+        return "BookEntity{" +
+                "catalogid=" + catalogid +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", url='" + url + '\'' +
+                ", readtime='" + readtime + '\'' +
+                ", index=" + index +
+                ", pos=" + pos +
+                ", readcount=" + readcount +
+                ", parentid=" + parentid +
+                '}';
     }
 }

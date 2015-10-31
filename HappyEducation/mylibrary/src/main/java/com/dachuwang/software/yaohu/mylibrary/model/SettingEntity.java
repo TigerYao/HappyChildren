@@ -12,15 +12,6 @@ import com.lidroid.xutils.db.annotation.Table;
 @Table(name = "setting_table")
 public class SettingEntity extends BaseEntity {
 
-    public static final Creator<SettingEntity> CREATOR = new Creator<SettingEntity>() {
-        public SettingEntity createFromParcel(Parcel source) {
-            return new SettingEntity(source);
-        }
-
-        public SettingEntity[] newArray(int size) {
-            return new SettingEntity[size];
-        }
-    };
     @Column(column = "device_sn")
     private String device_sn;
     @Column(column = "user")
@@ -33,25 +24,6 @@ public class SettingEntity extends BaseEntity {
     public SettingEntity() {
     }
 
-    protected SettingEntity(Parcel in) {
-        this.device_sn = in.readString();
-        this.user = in.readString();
-        this.pwd = in.readString();
-        this.software_version = in.readString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.device_sn);
-        dest.writeString(this.user);
-        dest.writeString(this.pwd);
-        dest.writeString(this.software_version);
-    }
 
     public String getDevice_sn() {
         return device_sn;

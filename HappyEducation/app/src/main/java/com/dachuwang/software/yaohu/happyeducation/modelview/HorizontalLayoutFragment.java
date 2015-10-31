@@ -17,11 +17,13 @@
 package com.dachuwang.software.yaohu.happyeducation.modelview;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +33,14 @@ import android.widget.Toast;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
 import com.dachuwang.software.yaohu.happyeducation.base.AppInfo;
+import com.dachuwang.software.yaohu.happyeducation.base.BaseActivity;
+import com.dachuwang.software.yaohu.mylibrary.file.FilePathConstant;
 import com.dachuwang.software.yaohu.mylibrary.model.BaseEntity;
 import com.dachuwang.software.yaohu.mylibrary.widget.CirclePageIndicator;
+import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewInterface;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewPager;
+
+import org.androidannotations.annotations.UiThread;
 
 import java.util.ArrayList;
 
@@ -44,49 +51,63 @@ public class HorizontalLayoutFragment extends Fragment {
     private CirclePageIndicator indicator;
     public LayoutAdapter mAdapter;
     private ImageView  up,next;
+    private FragmentListener fragmentListener;
+    private BaseActivity activity;
+
+    public void setFragmentListener(FragmentListener fragmentListener) {
+        this.fragmentListener = fragmentListener;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        mAdapter = new LayoutAdapter(getActivity(), mRecyclerView);
         super.onCreate(savedInstanceState);
+        activity = (BaseActivity)getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if (mViewRoot == null) {
             mViewRoot = inflater.inflate(R.layout.layout_horizontal, container, false);
-        } else if (mViewRoot.getParent() != null) {
-            ((ViewGroup) mViewRoot.getParent()).removeView(mViewRoot);
-        }
+
         return mViewRoot;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final Activity activity = getActivity();
         mToast = Toast.makeText(activity, "", Toast.LENGTH_SHORT);
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.list);
-        indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
+         indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
+//        indicator.setNormalImg(AppInfo.createStateDrawable(FilePathConstant.SECOND_ICON+"maincurrent.png"),AppInfo.createStateDrawable(FilePathConstant.SECOND_ICON+"maincurrent_select.png"));
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layout);
-       mAdapter = new LayoutAdapter(activity, mRecyclerView,AppInfo.appInfoEntityList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLongClickable(true);
-        updateState(RecyclerView.SCROLL_STATE_IDLE);
+        mAdapter.setOnItemClickListener(new RecyclerViewInterface.OnItemClickListener() {
+            @Override
+            public void onItemClick(View var1, Object var2) {
+                if (fragmentListener != null) {
+                    fragmentListener.onAdaperClickListener(var1, var2);
+                }
+            }
+        });
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
-                updateState(scrollState);
+//                updateState(scrollState);
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int i, int i2) {
                 int childCount = mRecyclerView.getChildCount();
+                if(childCount==0){
+                    return;
+                }
                 int width = mRecyclerView.getChildAt(0).getWidth();
                 int padding = (mRecyclerView.getWidth() - width) / 2;
                 for (int j = 0; j < childCount; j++) {
@@ -147,7 +168,13 @@ public class HorizontalLayoutFragment extends Fragment {
         mRecyclerView.addOnPageChangedListener(new RecyclerViewPager.OnPageChangedListener() {
             @Override
             public void OnPageChanged(int oldPosition, int newPosition) {
-
+                if (newPosition == 0) {
+                    next.setVisibility(View.VISIBLE);
+                    up.setVisibility(View.INVISIBLE);
+                } else if (newPosition == mAdapter.getItemCount()) {
+                    next.setVisibility(View.INVISIBLE);
+                    up.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -156,17 +183,21 @@ public class HorizontalLayoutFragment extends Fragment {
             }
 
             @Override
-            public void onPageSelected(int position) {
-                if (position == mAdapter.getItemCount() - 1) {
-                    next.setVisibility(View.INVISIBLE);
-                } else if (position == 0) {
-                    up.setVisibility(View.INVISIBLE);
-                } else if (position > 0 && position < mAdapter.getItemCount()) {
-                    if (next.getVisibility() == View.INVISIBLE)
-                        next.setVisibility(View.VISIBLE);
-                    if (up.getVisibility() == View.INVISIBLE)
-                        up.setVisibility(View.VISIBLE);
+            public void onPageSelected(int newPosition) {
+                if (mAdapter.getItemCount() <= 1) {
+                    return;
                 }
+                if (newPosition == 0) {
+                    next.setVisibility(View.VISIBLE);
+                    up.setVisibility(View.INVISIBLE);
+                } else if (newPosition == mAdapter.getItemCount() - 1) {
+                    next.setVisibility(View.INVISIBLE);
+                    up.setVisibility(View.VISIBLE);
+                }else{
+                    next.setVisibility(View.VISIBLE);
+                    up.setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override
@@ -180,42 +211,54 @@ public class HorizontalLayoutFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mRecyclerView.getCurrentPosition()<(mAdapter.getItemCount()-1))
                 mRecyclerView.smoothScrollToPosition(mRecyclerView.getCurrentPosition()+1);
+
             }
         });
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mRecyclerView.getCurrentPosition()>0)
                 mRecyclerView.smoothScrollToPosition(mRecyclerView.getCurrentPosition()-1);
             }
         });
-
         if(mAdapter.getItemCount()<=1){
             next.setVisibility(View.INVISIBLE);
-        }
-        Drawable upDrawalbe= AppInfo.createStateDrawable(getResources().getDrawable(R.mipmap.check_flipthearrowleft),getResources().getDrawable(R.mipmap.check_flipthearrowleft_select));
-        up.setImageDrawable(upDrawalbe);
+        }else
+            next.setVisibility(View.VISIBLE);
+        Drawable upDrawalbe= AppInfo.createStateDrawable(FilePathConstant.SECOND_ICON+"beforepage.png"); up.setImageDrawable(upDrawalbe);
+        Drawable downDrawalbe= AppInfo.createStateDrawable(FilePathConstant.SECOND_ICON+"afterpage.png");
+        next.setImageDrawable(downDrawalbe);
     }
 
 
-    private void updateState(int scrollState) {
-        String stateName = "Undefined";
-        switch (scrollState) {
-            case RecyclerView.SCROLL_STATE_IDLE:
-                stateName = "Idle";
-                break;
 
-            case RecyclerView.SCROLL_STATE_DRAGGING:
-                stateName = "Dragging";
-                break;
+    public void updateAdapter(final ArrayList<?extends BaseEntity> entities,final int comul){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(mAdapter!=null) {
+                    mAdapter.updateDatas(entities, comul);
+                    if (mAdapter.getItemCount() <= 1&&next!=null) {
+                        next.setVisibility(View.INVISIBLE);
+                    } else if(next!=null)
+                        next.setVisibility(View.VISIBLE);
 
-            case RecyclerView.SCROLL_STATE_SETTLING:
-                stateName = "Flinging";
-                break;
-        }
+                    if(mRecyclerView!=null){
+                        mRecyclerView.scrollToPosition(0);
+                    }
+                    if(indicator!=null)
+                        indicator.setRecyclerViewPager(mRecyclerView);
+
+                    activity.removeProgressDialog();
+                }
+            }
+        },500);
+
     }
 
-    public void updateAdapter(ArrayList<?extends BaseEntity> entities,int comul){
-        mAdapter.updateDatas(entities,comul);
+   public interface FragmentListener{
+        void onAdaperClickListener(View view,Object object);
     }
 }

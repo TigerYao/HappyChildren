@@ -24,14 +24,8 @@
         <activity
             android:windowSoftInputMode="adjustPan|stateHidden"
             android:name=".activity.CartongBooksActivity_"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_cartong_books" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
         <service android:name=".service.WallpaperSettingsService_" />
     </application>

@@ -17,15 +17,6 @@ import java.util.List;
 @Table(name = "appinfo_table")
 public class AppInfoEntity extends BaseEntity {
 
-    public static final Creator<AppInfoEntity> CREATOR = new Creator<AppInfoEntity>() {
-        public AppInfoEntity createFromParcel(Parcel source) {
-            return new AppInfoEntity(source);
-        }
-
-        public AppInfoEntity[] newArray(int size) {
-            return new AppInfoEntity[size];
-        }
-    };
     @Column(column = "appname")
     private String appname;
     @Column(column = "icon")
@@ -38,12 +29,7 @@ public class AppInfoEntity extends BaseEntity {
     public AppInfoEntity() {
     }
 
-    protected AppInfoEntity(Parcel in) {
-        this.appname = in.readString();
-        this.icon = in.readString();
-        this.appclass = in.readString();
-        this.index = in.readInt();
-    }
+
 
     public String getAppclass() {
         return appclass;
@@ -77,18 +63,7 @@ public class AppInfoEntity extends BaseEntity {
         this.index = index;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.appname);
-        dest.writeString(this.icon);
-        dest.writeString(this.appclass);
-        dest.writeInt(this.index);
-    }
 
     public List<AppInfoEntity> getAllFromDb() {
         try {

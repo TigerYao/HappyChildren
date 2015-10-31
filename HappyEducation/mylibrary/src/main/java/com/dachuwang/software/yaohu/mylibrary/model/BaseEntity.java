@@ -4,17 +4,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.lidroid.xutils.db.annotation.Column;
+import com.lidroid.xutils.db.annotation.Unique;
 
 /**
  * Created by yaohu on 15/8/21.
  * email yaohu@dachuwang.com
  */
-public abstract class BaseEntity implements Parcelable {
+public abstract class BaseEntity{
 
+    @Column(column = "_id")
     private int _id;
 
     @Column(column = "reverse1")
-    private String reverse1;
+    private int reverse1 = 0;
 
     @Column(column = "reverse2")
     private String reverse2;
@@ -25,12 +27,7 @@ public abstract class BaseEntity implements Parcelable {
     public BaseEntity() {
     }
 
-    protected BaseEntity(Parcel in) {
-        this._id = in.readInt();
-        this.reverse1 = in.readString();
-        this.reverse2 = in.readString();
-        this.type = in.readInt();
-    }
+
 
     public int getType() {
         return type;
@@ -48,11 +45,11 @@ public abstract class BaseEntity implements Parcelable {
         this._id = _id;
     }
 
-    public String getReverse1() {
+    public int getReverse1() {
         return reverse1;
     }
 
-    public void setReverse1(String reverse1) {
+    public void setReverse1(int reverse1) {
         this.reverse1 = reverse1;
     }
 
@@ -64,17 +61,5 @@ public abstract class BaseEntity implements Parcelable {
         this.reverse2 = reverse2;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this._id);
-        dest.writeString(this.reverse1);
-        dest.writeString(this.reverse2);
-        dest.writeInt(this.type);
-    }
 
 }

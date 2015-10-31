@@ -2,18 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:name="com.dachuwang.children.education.launcher.ChildrenEduLauncherFragment"
     android:layout_width="match_parent"
+    android:id="@+id/mainlayout"
     android:layout_height="match_parent">
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
-    <fragment
+    <FrameLayout
         android:layout_below="@id/toolbar"
         android:id="@+id/fragment"
-        android:name="com.dachuwang.software.yaohu.happyeducation.modelview.HorizontalLayoutFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="80dp"
         tools:layout="@layout/layout_horizontal" />
-
+<include
+    android:id="@+id/loading"
+    layout="@layout/view_loading_material"
+    />
 
 </RelativeLayout>

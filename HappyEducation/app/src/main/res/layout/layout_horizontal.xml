@@ -2,48 +2,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:gravity="center"
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/up"
         android:visibility="invisible"
         android:layout_width="@dimen/navgation_bar_width_45"
-        android:scaleType="center"
-        android:layout_centerVertical="true"
-        android:layout_height="@dimen/navgation_bar_height_90"
-        android:layout_gravity="center_vertical|left"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="@dimen/padding5"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="440px"
         android:layout_alignParentLeft="true"
         android:src="@mipmap/check_flipthearrowleft" />
 
     <ImageView
+        android:layout_alignParentTop="true"
         android:id="@+id/next"
         android:layout_width="@dimen/navgation_bar_width_45"
-        android:layout_height="@dimen/navgation_bar_height_90"
-        android:layout_gravity="center_vertical|right"
-        android:scaleType="center"
-        android:layout_centerVertical="true"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="440px"
+        android:layout_marginRight="@dimen/padding5"
         android:layout_alignParentRight="true"
         android:src="@mipmap/check_flipthearrowright" />
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_toLeftOf="@id/next"
         android:layout_toRightOf="@id/up"
+        android:layout_centerInParent="true"
         android:layout_height="match_parent">
+
     <com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewPager
         android:id="@+id/list"
-        android:layout_marginTop="@dimen/menu_icon_size_85"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/mainactivity_cardbg_height_534"
+        android:foregroundGravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/mainactivity_cardbg_height_532"
+        android:layout_gravity="top"
         android:clipToPadding="false"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@null"
-        app:triggerOffset="0.1" />
+        app:triggerOffset="0.1"
+         />
 
     <com.dachuwang.software.yaohu.mylibrary.widget.CirclePageIndicator
         android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
         android:gravity="center"
         android:layout_marginBottom="40dp"
         app:indicator_drawable_normal="@mipmap/maincurrent_yellowpagebreak"

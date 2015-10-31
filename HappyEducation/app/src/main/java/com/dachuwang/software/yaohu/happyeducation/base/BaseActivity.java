@@ -6,11 +6,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -21,7 +23,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.dachuwang.software.yaohu.happyeducation.R;
 import com.dachuwang.software.yaohu.happyeducation.util.ConstantUtils;
+import com.dachuwang.software.yaohu.mylibrary.file.FilePathConstant;
 import com.dachuwang.software.yaohu.mylibrary.widget.CustomProgressDialog;
 
 /**
@@ -92,10 +96,6 @@ public class BaseActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     /**
      * 描述：Toast提示文本.
@@ -161,6 +161,7 @@ public class BaseActivity extends AppCompatActivity {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setMessage(mProgressMessage);
+//            mProgressDialog.setContentView(R.layout.view_loading_material);
             /*Window window = mProgressDialog.getWindow();
             WindowManager.LayoutParams lp = window.getAttributes();
 			window.setGravity(Gravity.CENTER);
@@ -365,6 +366,31 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+
+    public void replaceFragment(int containId,Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(containId, fragment).commit();
+    }
+
+
+    public void addFrameAnimation(ImageView view){
+        AnimationDrawable animationDrawable = new AnimationDrawable();
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading01.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading02.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading03.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading04.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading05.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading06.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading07.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading08.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading09.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading10.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading11.png"),60);
+        animationDrawable.addFrame(Drawable.createFromPath(FilePathConstant.APK_ICON_DIR+"loading/loading12.png"),60);
+        view.setImageDrawable(animationDrawable);
+        animationDrawable.setOneShot(false);
+        animationDrawable.start();
 
     }
 }

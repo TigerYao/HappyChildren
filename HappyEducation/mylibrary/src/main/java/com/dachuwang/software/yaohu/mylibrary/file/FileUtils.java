@@ -1,4 +1,6 @@
 package com.dachuwang.software.yaohu.mylibrary.file;
+import android.graphics.drawable.Drawable;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
@@ -17,7 +19,7 @@ public class FileUtils {
         return null;
     }
 
-    public static String[] findFileByNameContain(String dir,final String name){
+    public static File[] findFileByNameContain(String dir,final String name){
         FilenameFilter filenameFilter = new FilenameFilter() {
             @Override
             public boolean accept(File file, String s) {
@@ -31,7 +33,7 @@ public class FileUtils {
         };
         File file = new File(dir);
         if(file!=null&&file.exists()&&file.isDirectory()){
-            return file.list(filenameFilter);
+            return file.listFiles(filenameFilter);
         }
         return null;
     }
@@ -52,4 +54,6 @@ public class FileUtils {
         }
         return null;
     }
+
+
 }

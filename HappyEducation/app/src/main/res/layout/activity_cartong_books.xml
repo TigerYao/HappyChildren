@@ -1,18 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/mainlayout"
     android:layout_height="match_parent"
-    tools:context="com.dachuwang.software.yaohu.happyeducation.activity.CartongBooksActivity">
+   >
     <include
-        android:id="@+id/toolbars"
+        android:id="@+id/toolbar"
         layout="@layout/childrentoolbar" />
-    <fragment
+    <FrameLayout
+        android:layout_marginTop="30dp"
         android:id="@+id/fragment"
-        android:layout_below="@id/toolbars"
-        android:name="com.dachuwang.software.yaohu.happyeducation.modelview.HorizontalLayoutFragment"
         android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        tools:layout="@layout/layout_horizontal" />
-
+        />
+    <include
+        android:id="@+id/loading"
+        layout="@layout/view_loading_material"
+        />
 </RelativeLayout>

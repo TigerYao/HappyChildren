@@ -1,0 +1,32 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cooki.tiger.childbook.activity.LauncherActivity">
+    <com.cooki.tiger.childbook.widget.DoublePagerView
+        android:layout_width="match_parent"
+        android:id="@+id/fullscreen_content"
+        android:keepScreenOn="true"
+        android:visibility="gone"
+        android:layout_height="match_parent"></com.cooki.tiger.childbook.widget.DoublePagerView>
+
+<com.cooki.tiger.childbook.widget.curl.CurlView
+    android:id="@+id/curl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/img"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:background="@drawable/doublepage"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/up"
+        android:layout_width="50dp"
+        android:layout_gravity="top|left"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="50dp"
+        android:layout_gravity="bottom|right"
+        android:layout_height="match_parent" />
+</FrameLayout>

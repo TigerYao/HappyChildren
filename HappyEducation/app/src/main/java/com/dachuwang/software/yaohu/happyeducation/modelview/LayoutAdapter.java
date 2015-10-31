@@ -17,17 +17,26 @@
 package com.dachuwang.software.yaohu.happyeducation.modelview;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dachuwang.software.yaohu.happyeducation.R;
+import com.dachuwang.software.yaohu.happyeducation.base.AppInfo;
+import com.dachuwang.software.yaohu.mylibrary.file.FilePathConstant;
+import com.dachuwang.software.yaohu.mylibrary.model.AppInfoEntity;
 import com.dachuwang.software.yaohu.mylibrary.model.BaseEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.BookEntity;
+import com.dachuwang.software.yaohu.mylibrary.model.RecentReadEntity;
 import com.dachuwang.software.yaohu.mylibrary.widget.RecyclerViewInterface;
 
 import java.util.ArrayList;
@@ -36,32 +45,25 @@ import java.util.List;
 
 public class LayoutAdapter<T> extends RecyclerView.Adapter<LayoutAdapter.SimpleViewHolder> {
     public static  int COMLUMES=3;
-    private final Context mContext;
+    static  Context mContext;
     private final RecyclerView mRecyclerView;
-    private  ArrayList<?extends BaseEntity> mItems;
+    private ArrayList<? extends BaseEntity> mItems;
     private int mCurrentItemId = 0;
-    int width = 0;
     private RecyclerViewInterface.OnItemClickListener onItemClickListener;
-    public LayoutAdapter(Context context, RecyclerView recyclerView,ArrayList<? extends BaseEntity> items) {
+    public LayoutAdapter(Context context, RecyclerView recyclerView) {
         mContext = context;
         mRecyclerView = recyclerView;
+        if(mItems==null)
+            mItems = new ArrayList<>();
+
+    }
+
+    public void updateDatas(ArrayList<? extends BaseEntity> items,int comlumes){
         if(items==null)
             items = new ArrayList<>();
         this.mItems = items;
-    }
-
-    public void updateDatas(ArrayList<BaseEntity> items,int comlumes){
-        mItems = items;
         COMLUMES = comlumes;
         notifyDataSetChanged();
-
-    }
-
-
-
-    public void removeItem(int position) {
-        mItems.remove(position);
-        notifyItemRemoved(position);
     }
 
     @Override
@@ -87,21 +89,16 @@ public class LayoutAdapter<T> extends RecyclerView.Adapter<LayoutAdapter.SimpleV
         for(int i=startPostion;i<lastPosition;i++){
             subList.add(mItems.get(i));
         }
-        if(width==0) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                     width = (holder.container.getWidth()-holder.container.getPaddingRight()*2)/ COMLUMES;
                      onBindList(holder, subList);
                 }
             }, 500);
-        }else {
-            onBindList(holder, subList);
-        }
     }
 
     private void onBindList(SimpleViewHolder holder, ArrayList<BaseEntity> subList) {
-        FirstSubAdatepr adatepr = new FirstSubAdatepr(subList, width);
+        FirstSubAdatepr adatepr = new FirstSubAdatepr(subList);
         holder.recyclerView.setAdapter(adatepr);
         adatepr.setOnItemClickListener(onItemClickListener);
     }
@@ -114,12 +111,15 @@ public class LayoutAdapter<T> extends RecyclerView.Adapter<LayoutAdapter.SimpleV
         if(mItems.size()<=COMLUMES){
             return 1;
         }
-        return mItems.size()/COMLUMES+(mItems.size()%COMLUMES);
+        if(mItems.size()%COMLUMES>0){
+            return mItems.size()/COMLUMES+1;
+        }
+        return mItems.size()/COMLUMES;
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
-        public final LinearLayout container;
-        public final RecyclerView recyclerView;
+        public  LinearLayout container;
+        public  RecyclerView recyclerView;
         public SimpleViewHolder(View view) {
             super(view);
             container = (LinearLayout) view.findViewById(R.id.container);
