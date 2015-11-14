@@ -8,35 +8,53 @@
     android:layout_height="wrap_content">
 
 <android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
+    android:id="@+id/toolbars"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
+    android:gravity="center_vertical"
     android:minHeight="?attr/actionBarSize"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="right|center_vertical"
-        android:layout_height="match_parent">
-        <EditText
-            android:padding="@dimen/padding5"
-            android:id="@+id/search_input"
-            android:layout_width="wrap_content"
-            android:background="@mipmap/search_box_back"
-            android:layout_height="wrap_content" />
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
         <ImageView
+            android:layout_alignParentLeft="true"
             android:id="@+id/search_bar"
             android:layout_margin="@dimen/padding5"
             android:layout_width="wrap_content"
             android:src="@mipmap/search_back"
             android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:id="@+id/return_back"
+            android:layout_margin="@dimen/padding5"
+            android:layout_width="wrap_content"
+            android:src="@drawable/returnback"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_toLeftOf="@id/return_back"
+            android:layout_toRightOf="@id/search_bar"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:id="@+id/search_input"
+            android:layout_width="1177px"
+            android:background="@mipmap/search_box_back"
+            android:layout_height="wrap_content" />
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@id/return_back"
+            android:layout_toRightOf="@id/search_bar"
             android:layout_width="match_parent"
             android:layout_weight="1.0"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
             android:gravity="center"
             android:layout_height="@dimen/toolbar_h">
             <ImageView
@@ -59,13 +77,8 @@
                 android:layout_width="@dimen/search_input_height_90"
                 android:layout_height="@dimen/search_input_height_90" />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/return_back"
-            android:layout_margin="@dimen/padding5"
-            android:layout_width="wrap_content"
-            android:src="@drawable/returnback"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+
+    </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
 

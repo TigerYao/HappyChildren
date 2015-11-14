@@ -54,8 +54,8 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
     TabLayout titletab;
     @ViewById
     ImageView next;
-//    @ViewById
-//    Toolbar toolbar;
+    @ViewById
+    View toolbar;
     @ViewById
     EditText search_input;
     @ViewById
@@ -121,17 +121,17 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
         titletab.getTabAt(titletab.getSelectedTabPosition()+1).select();
     }
 
-//    @Click(R.id.search_bar)
-//    void search(){
-//        if(search_input.getVisibility()==View.GONE&& TextUtils.isEmpty(search_input.getText()))
-//        search_input.setVisibility(View.VISIBLE);
-//        else if(!TextUtils.isEmpty(search_input.getText())){
-//            String searchContent = search_input.getText().toString();
-//        }else{
-//            KeyboardUtil.closeKeyboard(this);
-//            search_input.setVisibility(View.GONE);
-//        }
-//    }
+    @Click(R.id.search_bar)
+    void search(){
+        if(search_input.getVisibility()==View.GONE&& TextUtils.isEmpty(search_input.getText()))
+        search_input.setVisibility(View.VISIBLE);
+        else if(!TextUtils.isEmpty(search_input.getText())){
+            String searchContent = search_input.getText().toString();
+        }else{
+            KeyboardUtil.closeKeyboard(this);
+            search_input.setVisibility(View.GONE);
+        }
+    }
 
     @Click(R.id.return_back)
     void onBackView(){
@@ -210,7 +210,7 @@ public class CartongBooksActivity extends BaseActivity implements TabLayout.OnTa
     @Override
     protected void onResume() {
         super.onResume();
-        loading.setVisibility(View.VISIBLE);
+//        loading.setVisibility(View.VISIBLE);
         LayoutAdapter.COMLUMES = 4;
         FirstSubAdatepr.height = (int)getResources().getDimension(R.dimen.cartong_cardbg_height);
         FirstSubAdatepr.childrenWith = (int)getResources().getDimension(R.dimen.cartong_cardbg_with);
